@@ -18,6 +18,11 @@ import java.awt.Font;
 
 public class StartView extends JFrame {
 	private JPanel contentPane;
+	JPanel buttonPanel = new JPanel();
+	JLabel titleAnimalMaster = new JLabel("Animal Master");
+	JButton btnStartGame = new JButton("START");
+	JButton btnLoadGame = new JButton("LOAD");
+	
 	ImageIcon icon;
 	TrainingCityView trainingCityView;
 
@@ -26,17 +31,19 @@ public class StartView extends JFrame {
 	 */
 	public static void main(String[] args) {
 		StartView frame = new StartView();
-		
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					StartView frame = new StartView();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
+
+	}
+	
+	//초기화면  설정
+	private void initTitle() {
+		contentPane = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.drawImage(icon.getImage(), 0, 0, null);
+
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
 	}
 
 	/**
@@ -60,35 +67,29 @@ public class StartView extends JFrame {
 		contentPane.setLayout(null); //절대경로로 레이아웃배치
 		
 		//초기화면에 버튼이 들어가는 패널 정의
-		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBounds(0, 0, 1200, 600);
 		buttonPanel.setBackground(new Color(255, 0, 0, 0));
-		contentPane.add(buttonPanel);
 		buttonPanel.setLayout(null);
-		
+		contentPane.add(buttonPanel);
+
 		//초기화면에 나타나는 Animal Master 타이틀 정의
-		JLabel titleAnimalMaster = new JLabel("Animal Master");
 		titleAnimalMaster.setFont(new Font("굴림", Font.PLAIN, 25));
 		titleAnimalMaster.setBounds(565, 149, 196, 61);
 		buttonPanel.add(titleAnimalMaster);
 		
 		//gameStart버튼 정의
-		JButton btnStartGame = new JButton("START");
 		btnStartGame.setBounds(584, 289, 164, 30);
 		buttonPanel.add(btnStartGame);
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				trainingCityView = new TrainingCityView();
-				setContentPane(trainingCityView);
-				setSize(trainingCityView.getBackgroundImageX(),trainingCityView.getbackgroundImageY());
-				setLocationRelativeTo(null);
+				btnStartListener(e);
 			}
 		});
 		
 		//gameLoad버튼 정의
-		JButton btnLoadGame = new JButton("LOAD");
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnLoadListener(e);
 			}
 		});
 		btnLoadGame.setBounds(584, 366, 164, 30);
@@ -97,21 +98,20 @@ public class StartView extends JFrame {
 		setVisible(true);
 	}
 	
-	private void initTitle() {
-		contentPane = new JPanel() {
-			public void paintComponent(Graphics g) {
-			
-				g.drawImage(icon.getImage(), 0, 0, null);
-				
-//			     Approach 2: Scale image to size of component
-//                Dimension d = getSize();
-//                g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
-//                 Approach 3: Fix the image position in the scroll pane
-//                 Point p = scrollPane.getViewport().getViewPosition();
-//                 g.drawImage(icon.getImage(), p.x, p.y, null);
-				setOpaque(false);
-				super.paintComponent(g);
-			}
-		};
+
+	
+	
+	/*
+	 * 버튼 리스너 달기
+	 */
+	private void btnStartListener(ActionEvent e) {
+		trainingCityView = new TrainingCityView();
+		setContentPane(trainingCityView);
+		setSize(trainingCityView.getBackgroundImageX(),trainingCityView.getbackgroundImageY());
+		setLocationRelativeTo(null);
+	}
+
+	private void btnLoadListener(ActionEvent e) {
+		
 	}
 }
