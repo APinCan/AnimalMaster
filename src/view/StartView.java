@@ -6,12 +6,16 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -25,6 +29,8 @@ public class StartView extends JFrame {
 	
 	ImageIcon icon;
 	TrainingCityView trainingCityView;
+	String path;
+	Clip clip; //배경음악재생위해 필요
 
 	/**
 	 * Launch the application.
@@ -44,19 +50,22 @@ public class StartView extends JFrame {
 				super.paintComponent(g);
 			}
 		};
+		setTitle("Animal Mater!");
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public StartView() {
-		String path=System.getProperty("user.dir");
+		path=System.getProperty("user.dir");
 		String imagePath=path+"/src/background.jpg";
 		icon=new ImageIcon(imagePath);
 		Image img=icon.getImage();
 		
 		//초기화면
 		initTitle();
+		
+		playBackgroundMusic();
 		
 		//frame정의
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +107,19 @@ public class StartView extends JFrame {
 		setVisible(true);
 	}
 	
-
+	//배경음악재생
+	public void playBackgroundMusic() {
+		String mediaPath=path+"\\src\\openingWAV.wav";
+		try {
+			AudioInputStream audioIn= AudioSystem.getAudioInputStream(new File(mediaPath).getAbsoluteFile());
+			clip = AudioSystem.getClip();
+			clip.open(audioIn);
+			clip.loop(3);
+			clip.start();
+		} catch(Exception e) {
+			System.out.println("Error!");
+		}
+	}
 	
 	
 	/*

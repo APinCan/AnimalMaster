@@ -15,4 +15,5 @@ public interface View {
 	public abstract int getBackgroundImageX();
 	//배경 이미지의 Y크기를 가져옴
 	public abstract int getBackgroundImageY();
+	//배경 음악도 넣기
 }
