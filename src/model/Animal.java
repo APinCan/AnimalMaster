@@ -3,23 +3,34 @@ package model;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Animal {
+	private String name;
 	private int hp;
 	private int power; //공격력
 	private int armor; //방어력
 	private int evasion; //회피율 1~100 30
 	
 	public Animal() {
+		this.name = null;
 		this.hp = 100;
 		this.power = 10;
 		this.armor = 10;
 		this.evasion = 10;
 	}
 	
-	public Animal(int hp,int power, int armor, int evasion) {
+	public Animal(String name, int hp,int power, int armor, int evasion) {
+		this.name = name;
 		this.hp = hp;
 		this.power = power;
 		this.armor = armor;
 		this.evasion = evasion;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public int getHp() {

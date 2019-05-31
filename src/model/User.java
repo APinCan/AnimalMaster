@@ -12,11 +12,15 @@ public class User extends Hunter {
 	}
 	
 	public String getWin() {
-		String str="";
-		for(int i : win) {
-			str+=Integer.toString(i);
+		String output = "";
+		int i=0;
+		while(true) {
+			output+=Integer.toString(this.win[i]);
+			i++;
+			if(i==win.length-1) break;
+			output+=",";
 		}
-		return str;
+		return output;
 	}
 	
 }
