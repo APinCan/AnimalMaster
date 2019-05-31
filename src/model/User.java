@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class User extends Hunter {
 	public int[] win;
 	
@@ -18,5 +20,7 @@ public class User extends Hunter {
 		}
 		return str;
 	}
+	
+	
 	
 }

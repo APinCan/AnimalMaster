@@ -5,8 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Hunter {
 	public int id; //npc_hunter들의 숫자
-	private ArrayList<Animal> cage;
-	private Animal attacker;
+	public ArrayList<Animal> cage;
+	public Animal attacker;
 	
 	public Hunter() {
 		cage = new ArrayList<Animal>();
@@ -29,6 +29,12 @@ public class Hunter {
 		//도망
 		return true;
 	}
+	
+	public ArrayList<Animal> getCage(){
+		return this.cage;
+	}
+	
+	
 
 }
 
