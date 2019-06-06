@@ -126,9 +126,14 @@ public class StartView extends JFrame {
 	 * 버튼 리스너 달기
 	 */
 	private void btnStartListener(ActionEvent e) {
-		trainingCityView = new TrainingCityView();
+//		trainingCityView = new TrainingCityView();
+//		setContentPane(trainingCityView);
+//		setSize(trainingCityView.getBackgroundImageX(),trainingCityView.getbackgroundImageY());
+//		setLocationRelativeTo(null);
+		clip.close();
+		GeneralView trainingCityView =new GeneralView("TrainingCityView");
 		setContentPane(trainingCityView);
-		setSize(trainingCityView.getBackgroundImageX(),trainingCityView.getbackgroundImageY());
+		setSize(trainingCityView.getBackgroundImageX(),trainingCityView.getBackgroundImageY());
 		setLocationRelativeTo(null);
 	}
 

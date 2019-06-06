@@ -50,4 +50,10 @@ public class BeachView extends JPanel implements View {
 		return this.viewY;
 	}
 
+	@Override
+	public void playBackgroundMusic() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
