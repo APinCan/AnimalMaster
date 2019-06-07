@@ -23,7 +23,6 @@ public class GeneralView extends JPanel implements View {
 	
 	public GeneralView(String mapName) {
 		setMap(mapName);
-		replayMusic();
 	}
 	
 	@Override
@@ -91,35 +90,30 @@ public class GeneralView extends JPanel implements View {
 		String imagePath=path+"/src/"+mapName+".jpg";
 		icon = new ImageIcon(imagePath);
 		
-		if(mapName.equals("ForestView")) {
+		if(mapName=="ForestView") {
 			this.viewX=768;
 			this.viewY=704;
 		}
-		else if(mapName.equals("DesertView")){
+		else if(mapName=="DesertView"){
 			this.viewX=736;
 			this.viewY=496;
 		}
-		else if(mapName.equals("BeachView")) {
+		else if(mapName=="BeachView") {
 			this.viewX=640;
 			this.viewY=960;
 		}
-		else if(mapName.equals("TrainingCitView")) {
+		else if(mapName=="TrainingCityView") {
 			this.viewX=640;
 			this.viewY=320;
 		}
-		else if(mapName.equals("BattlePhase")) {
+		else if(mapName=="BattlePhase") {
 			this.viewX=556;
 			this.viewY=371;
 		}
 		
-		//맵의 사이즈 설정
-		setSize(this.viewX, this.viewY);
-	}
-	
-	public void replayMusic() {
-		//배경음악 지우고
-//		clip.close();
-		//다른 음악 재생
 		playBackgroundMusic();
+		//맵의 사이즈 설정
+//		setSize(this.viewX, this.viewY);
 	}
+
 }

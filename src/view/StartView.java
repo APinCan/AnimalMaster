@@ -1,8 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -12,12 +10,15 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
 import java.awt.Font;
 
 public class StartView extends JFrame {
@@ -64,8 +65,10 @@ public class StartView extends JFrame {
 		
 		//초기화면
 		initTitle();
-		
+		//배경음악재생
 		playBackgroundMusic();
+		//메뉴만들기
+		createMenu();
 		
 		//frame정의
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,6 +124,28 @@ public class StartView extends JFrame {
 		}
 	}
 	
+	//메뉴만들기
+	void createMenu() {
+		JMenuBar mb = new JMenuBar(); // 메뉴바 생성
+		JMenuItem [] menuItem = new JMenuItem [2];
+		String[] itemTitle = {"SAVE", "EXIT"};
+		JMenu screenMenu = new JMenu("Menu");
+
+		for(int i=0; i<menuItem.length; i++) {
+			menuItem[i] = new JMenuItem(itemTitle[i]); 
+			menuItem[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					menuActionListener(e);
+				}		
+			}); 
+			screenMenu.add(menuItem[i]);
+		}
+		
+		mb.add(screenMenu); 
+		setJMenuBar(mb); // 메뉴바를 프레임에 부착
+	}
 	
 	/*
 	 * 버튼 리스너 달기
@@ -139,5 +164,19 @@ public class StartView extends JFrame {
 
 	private void btnLoadListener(ActionEvent e) {
 		
+	}
+	
+	//액션 이벤트 달기
+	private void menuActionListener(ActionEvent e) {
+		String message = e.getActionCommand(); 
+		switch(message) { // 메뉴 아이템의 종류 구분
+			case "SAVE":
+				//세이브할때 처리할 것
+				break;
+			case "EXIT" :
+				System.exit(0);
+		}
+		
+		contentPane.repaint();
 	}
 }
