@@ -49,4 +49,10 @@ public class ForestView extends JPanel implements View {
 		setSize(viewX, viewY);
 	}
 
+	@Override
+	public void playBackgroundMusic() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

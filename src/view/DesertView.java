@@ -49,5 +49,11 @@ public class DesertView extends JPanel implements View {
 		// TODO Auto-generated method stub
 		return this.viewY;
 	}
+
+	@Override
+	public void playBackgroundMusic() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
