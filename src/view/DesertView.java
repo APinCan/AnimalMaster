@@ -32,7 +32,7 @@ public class DesertView extends JPanel implements View {
 	@Override
 	public void setMapSize(String mapName) {
 		// TODO Auto-generated method stub
-		String imagePath=path+"/src/"+mapName+".jpg";
+		String imagePath=path+"/src/Image/"+mapName+".jpg";
 		icon=new ImageIcon(imagePath);
 		
 		setSize(viewX, viewY);

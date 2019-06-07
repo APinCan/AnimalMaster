@@ -59,7 +59,7 @@ public class StartView extends JFrame {
 	 */
 	public StartView() {
 		path=System.getProperty("user.dir");
-		String imagePath=path+"/src/background.jpg";
+		String imagePath=path+"/src/Image/background.jpg";
 		icon=new ImageIcon(imagePath);
 		Image img=icon.getImage();
 		
@@ -112,7 +112,7 @@ public class StartView extends JFrame {
 	
 	//배경음악재생
 	public void playBackgroundMusic() {
-		String mediaPath=path+"\\src\\openingWAV.wav";
+		String mediaPath=path+"\\src\\Music\\openingWAV.wav";
 		try {
 			AudioInputStream audioIn= AudioSystem.getAudioInputStream(new File(mediaPath).getAbsoluteFile());
 			clip = AudioSystem.getClip();
