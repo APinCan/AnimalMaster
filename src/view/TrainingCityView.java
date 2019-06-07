@@ -22,7 +22,7 @@ public class TrainingCityView extends JPanel {
 	public TrainingCityView() {
 		new JFXPanel();
 		path=System.getProperty("user.dir");
-		String imagePath=path+"/src/trainingCity.jpg";
+		String imagePath=path+"/src/Image/trainingCity.jpg";
 		icon=new ImageIcon(imagePath);
 		img=icon.getImage();
 		

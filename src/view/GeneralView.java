@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class GeneralView extends JPanel implements View {
-	
 	private int viewX;
 	private int viewY;
 	private String mapName;
@@ -72,7 +71,7 @@ public class GeneralView extends JPanel implements View {
 			break;
 		}
 		
-		String mediaPath=path+"\\src\\"+musicName;
+		String mediaPath=path+"\\src\\Music\\"+musicName;
 		try {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(mediaPath).getAbsoluteFile());
 			clip= AudioSystem.getClip();
@@ -87,7 +86,7 @@ public class GeneralView extends JPanel implements View {
 
 	public void setMap(String mapName) {
 		this.mapName=mapName;
-		String imagePath=path+"/src/"+mapName+".jpg";
+		String imagePath=path+"/src/Image/"+mapName+".jpg";
 		icon = new ImageIcon(imagePath);
 		
 		if(mapName=="ForestView") {
@@ -115,5 +114,4 @@ public class GeneralView extends JPanel implements View {
 		//맵의 사이즈 설정
 //		setSize(this.viewX, this.viewY);
 	}
-
 }

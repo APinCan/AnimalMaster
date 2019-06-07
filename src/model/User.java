@@ -21,6 +21,5 @@ public class User extends Hunter {
 			output+=",";
 		}
 		return output;
-	}
-	
+	}	
 }
