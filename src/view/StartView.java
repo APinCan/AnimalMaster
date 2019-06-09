@@ -1,17 +1,23 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -21,29 +27,71 @@ import javax.swing.JMenuItem;
 
 import java.awt.Font;
 
-public class StartView extends JFrame {
+public class StartView extends JFrame{
 	private JPanel contentPane;
 	JPanel buttonPanel = new JPanel();
 	JLabel titleAnimalMaster = new JLabel("Animal Master");
 	JButton btnStartGame = new JButton("START");
 	JButton btnLoadGame = new JButton("LOAD");
+	JPanel characterPanel;
+	JLabel charLabel;
 	
 	ImageIcon icon;
 	TrainingCityView trainingCityView;
 	String path;
 	Clip clip; //배경음악재생위해 필요
+	
+	//캐릭터때문에 추가
+//	ImageIcon characterImageIcon;
+//	Image charImage;
+//	String charPath;
+//	private static final String LEFT="Left";
+//	private static final String RIGHT="Right";
+//	private static final String UP="Up";
+//	private static final String DOWN="Down";
+//	
+//	private Action left= new AbstractAction(LEFT) {
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			charLabel.setLocation(charLabel.getX()-5, charLabel.getY());
+//		}
+//	};
+//	
+//	private Action right=new AbstractAction(RIGHT) {
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			charLabel.setLocation(charLabel.getX()+5, charLabel.getY());
+//		}
+//	};
+//	
+//	private Action up = new AbstractAction(UP) {
+//		@Override
+//		public void actionPerformed(ActionEvent arg0) {
+//			// TODO Auto-generated method stub
+//			charLabel.setLocation(charLabel.getX(),charLabel.getY()-5);
+//		}
+//	};
+//	
+//	private Action down = new AbstractAction(DOWN) {
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			// TODO Auto-generated method stub
+//			charLabel.setLocation(charLabel.getX(), charLabel.getY()+5);
+//		}	
+//	};
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		StartView frame = new StartView();
-
 	}
 	
 	//초기화면  설정
 	private void initTitle() {
 		contentPane = new JPanel() {
+			
 			public void paintComponent(Graphics g) {
 				g.drawImage(icon.getImage(), 0, 0, null);
 
@@ -54,10 +102,13 @@ public class StartView extends JFrame {
 		setTitle("Animal Mater!");
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
 	public StartView() {
+
+		
 		path=System.getProperty("user.dir");
 		String imagePath=path+"/src/Image/background.jpg";
 		icon=new ImageIcon(imagePath);
@@ -69,6 +120,8 @@ public class StartView extends JFrame {
 		playBackgroundMusic();
 		//메뉴만들기
 		createMenu();
+		//캐릭터설정
+//		setCharacter();
 		
 		//frame정의
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,8 +160,36 @@ public class StartView extends JFrame {
 		btnLoadGame.setBounds(584, 366, 164, 30);
 		buttonPanel.add(btnLoadGame);
 		
-		setVisible(true);
+		characterPanel = new JPanel();
+		characterPanel.setBounds(0, 0, 1252, 570);
+		characterPanel.setBackground(new Color(255, 0, 0, 0));
+		contentPane.add(characterPanel);
+		
+		//캐릭터추가
+//		charLabel=new JLabel(characterImageIcon);
+//		charLabel.setEnabled(true);
+//		
+//		Dimension size =  charLabel.getPreferredSize();
+//		charLabel.setLocation(50, 50);
+//		charLabel.setSize(size.width, size.height);
+//		contentPane.add(charLabel);
+		
+		setVisible(true);		
+//		contentPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), LEFT);
+//		contentPane.getActionMap().put(LEFT, left);
+//		contentPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), RIGHT);
+//		contentPane.getActionMap().put(RIGHT, right);
+//		contentPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), UP);
+//		contentPane.getActionMap().put(UP, up);
+//		contentPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), DOWN);
+//		contentPane.getActionMap().put(DOWN,  down);
 	}
+	
+//	public void setCharacter() {
+//		charPath=path+"/src/Image/Hunter.jpg";
+//		characterImageIcon=new ImageIcon(charPath);
+//		charImage=characterImageIcon.getImage();
+//	}
 	
 	//배경음악재생
 	public void playBackgroundMusic() {
@@ -151,14 +232,13 @@ public class StartView extends JFrame {
 	 * 버튼 리스너 달기
 	 */
 	private void btnStartListener(ActionEvent e) {
-//		trainingCityView = new TrainingCityView();
-//		setContentPane(trainingCityView);
-//		setSize(trainingCityView.getBackgroundImageX(),trainingCityView.getbackgroundImageY());
-//		setLocationRelativeTo(null);
 		clip.close();
 		GeneralView trainingCityView =new GeneralView("TrainingCityView");
 		setContentPane(trainingCityView);
 		setSize(trainingCityView.getBackgroundImageX(),trainingCityView.getBackgroundImageY());
+
+		trainingCityView.requestFocus();
+		
 		setLocationRelativeTo(null);
 	}
 
@@ -166,7 +246,7 @@ public class StartView extends JFrame {
 		
 	}
 	
-	//액션 이벤트 달기
+	//메뉴 이벤트 달기
 	private void menuActionListener(ActionEvent e) {
 		String message = e.getActionCommand(); 
 		switch(message) { // 메뉴 아이템의 종류 구분
@@ -179,4 +259,5 @@ public class StartView extends JFrame {
 		
 		contentPane.repaint();
 	}
+
 }
