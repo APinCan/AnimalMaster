@@ -35,57 +35,18 @@ public class StartView extends JFrame{
 	JButton btnLoadGame = new JButton("LOAD");
 	JPanel characterPanel;
 	JLabel charLabel;
-	
 	ImageIcon icon;
-	TrainingCityView trainingCityView;
 	String path;
 	Clip clip; //배경음악재생위해 필요
 	
-	//캐릭터때문에 추가
-//	ImageIcon characterImageIcon;
-//	Image charImage;
-//	String charPath;
-//	private static final String LEFT="Left";
-//	private static final String RIGHT="Right";
-//	private static final String UP="Up";
-//	private static final String DOWN="Down";
-//	
-//	private Action left= new AbstractAction(LEFT) {
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			charLabel.setLocation(charLabel.getX()-5, charLabel.getY());
-//		}
-//	};
-//	
-//	private Action right=new AbstractAction(RIGHT) {
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			charLabel.setLocation(charLabel.getX()+5, charLabel.getY());
-//		}
-//	};
-//	
-//	private Action up = new AbstractAction(UP) {
-//		@Override
-//		public void actionPerformed(ActionEvent arg0) {
-//			// TODO Auto-generated method stub
-//			charLabel.setLocation(charLabel.getX(),charLabel.getY()-5);
-//		}
-//	};
-//	
-//	private Action down = new AbstractAction(DOWN) {
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			// TODO Auto-generated method stub
-//			charLabel.setLocation(charLabel.getX(), charLabel.getY()+5);
-//		}	
-//	};
-	
+	GeneralView generalView = new GeneralView();
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		StartView frame = new StartView();
+		
 	}
 	
 	//초기화면  설정
@@ -102,12 +63,8 @@ public class StartView extends JFrame{
 		setTitle("Animal Mater!");
 	}
 
-	
-	/**
-	 * Create the frame.
-	 */
 	public StartView() {
-
+		generalView.setStartView(this);
 		
 		path=System.getProperty("user.dir");
 		String imagePath=path+"/src/Image/background.jpg";
@@ -120,8 +77,6 @@ public class StartView extends JFrame{
 		playBackgroundMusic();
 		//메뉴만들기
 		createMenu();
-		//캐릭터설정
-//		setCharacter();
 		
 		//frame정의
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -164,32 +119,9 @@ public class StartView extends JFrame{
 		characterPanel.setBounds(0, 0, 1252, 570);
 		characterPanel.setBackground(new Color(255, 0, 0, 0));
 		contentPane.add(characterPanel);
-		
-		//캐릭터추가
-//		charLabel=new JLabel(characterImageIcon);
-//		charLabel.setEnabled(true);
-//		
-//		Dimension size =  charLabel.getPreferredSize();
-//		charLabel.setLocation(50, 50);
-//		charLabel.setSize(size.width, size.height);
-//		contentPane.add(charLabel);
-		
+
 		setVisible(true);		
-//		contentPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), LEFT);
-//		contentPane.getActionMap().put(LEFT, left);
-//		contentPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), RIGHT);
-//		contentPane.getActionMap().put(RIGHT, right);
-//		contentPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), UP);
-//		contentPane.getActionMap().put(UP, up);
-//		contentPane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), DOWN);
-//		contentPane.getActionMap().put(DOWN,  down);
 	}
-	
-//	public void setCharacter() {
-//		charPath=path+"/src/Image/Hunter.jpg";
-//		characterImageIcon=new ImageIcon(charPath);
-//		charImage=characterImageIcon.getImage();
-//	}
 	
 	//배경음악재생
 	public void playBackgroundMusic() {
@@ -223,7 +155,6 @@ public class StartView extends JFrame{
 			}); 
 			screenMenu.add(menuItem[i]);
 		}
-		
 		mb.add(screenMenu); 
 		setJMenuBar(mb); // 메뉴바를 프레임에 부착
 	}
@@ -233,11 +164,12 @@ public class StartView extends JFrame{
 	 */
 	private void btnStartListener(ActionEvent e) {
 		clip.close();
-		GeneralView trainingCityView =new GeneralView("TrainingCityView");
-		setContentPane(trainingCityView);
-		setSize(trainingCityView.getBackgroundImageX(),trainingCityView.getBackgroundImageY());
+		//마을로 감
+		generalView.setMap("TrainingCityView");
+		setContentPane(generalView);
+		setSize(generalView.getBackgroundImageX(),generalView.getBackgroundImageY());
 
-		trainingCityView.requestFocus();
+		generalView.requestFocus();
 		
 		setLocationRelativeTo(null);
 	}
@@ -259,5 +191,14 @@ public class StartView extends JFrame{
 		
 		contentPane.repaint();
 	}
-
+	
+	public void moveNextMap(String nextMap) {
+		generalView.setMap(nextMap);
+		setContentPane(generalView);
+		setSize(generalView.getBackgroundImageX(), generalView.getBackgroundImageY());
+		
+		generalView.requestFocus();
+		
+		setLocationRelativeTo(null);
+	}
 }

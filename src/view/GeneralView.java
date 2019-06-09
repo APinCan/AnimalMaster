@@ -25,6 +25,7 @@ public class GeneralView extends JPanel implements View{
 	ImageIcon icon;
 	Clip clip;
 	
+	StartView startView;
 	
 	//캐릭터이동관련
 	ImageIcon characterImageIcon;
@@ -32,6 +33,9 @@ public class GeneralView extends JPanel implements View{
 	String charPath;
 	JLabel charLabel;
 	
+	/*
+	 * 키보드 리스너 binding
+	 */
 	private static final String LEFT="Left";
 	private static final String RIGHT="Right";
 	private static final String UP="Up";
@@ -40,20 +44,26 @@ public class GeneralView extends JPanel implements View{
 	private Action left= new AbstractAction(LEFT) {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int locationX = charLabel.getX()-5;
+			int locationX = charLabel.getX()-25;
 			int locationY = charLabel.getY();
 			
 			limitBoundary(locationX, locationY);
+			moveNextView();
+			
+			System.out.println("x :"+charLabel.getX()+", y : "+charLabel.getY());
 		}
 	};
 	
 	private Action right=new AbstractAction(RIGHT) {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int locationX = charLabel.getX()+5;
+			int locationX = charLabel.getX()+25;
 			int locationY = charLabel.getY();
 			
 			limitBoundary(locationX, locationY);
+			moveNextView();
+			
+			System.out.println("x :"+charLabel.getX()+", y : "+charLabel.getY());
 		}
 	};
 	
@@ -62,9 +72,12 @@ public class GeneralView extends JPanel implements View{
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			int locationX= charLabel.getX();
-			int locationY=charLabel.getY()-5;
+			int locationY=charLabel.getY()-25;
 			
 			limitBoundary(locationX, locationY);
+			moveNextView();
+			
+			System.out.println("x :"+charLabel.getX()+", y : "+charLabel.getY());
 		}
 	};
 	
@@ -73,13 +86,18 @@ public class GeneralView extends JPanel implements View{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			int locationX = charLabel.getX();
-			int locationY = charLabel.getY()+5;
+			int locationY = charLabel.getY()+25;
 			
 			limitBoundary(locationX, locationY);
+			moveNextView();
+			
+			System.out.println("x :"+charLabel.getX()+", y : "+charLabel.getY());
 		}	
 	};
 	
-	
+	/*
+	 * 뷰생성
+	 */
 	public GeneralView() {
 		this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), LEFT);
 		this.getActionMap().put(LEFT, left);
@@ -205,6 +223,10 @@ public class GeneralView extends JPanel implements View{
 //		setSize(this.viewX, this.viewY);
 	}
 	
+	public void setStartView(StartView startView) {
+		this.startView=startView;
+	}
+	
 	//맵의 boundary를 설정해 그 밖으로 못나가게 함
 	private void limitBoundary(int x, int y) {
 		if(x<0) {
@@ -221,6 +243,28 @@ public class GeneralView extends JPanel implements View{
 		}
 		else {
 			charLabel.setLocation(x,y);
+		}
+	}
+	
+	public void moveNextView() {
+		int currentLocationX = charLabel.getX();
+		int currentLocationY = charLabel.getY();
+		
+		//왼쪽
+		if(currentLocationX==0 && currentLocationY==125) {
+			startView.moveNextMap("ForestView");
+		}
+		//아래
+		else if(currentLocationX==200 && currentLocationY==200) {
+			startView.moveNextMap("BeachView");
+		}
+		//오른쪽
+		else if(currentLocationX >= 600 && currentLocationY == 125) {
+			startView.moveNextMap("DesertView");
+		}
+		//위에
+		else if(currentLocationX == 300 && currentLocationY==0) {
+			//보스만나러
 		}
 	}
 }
