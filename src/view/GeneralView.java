@@ -271,7 +271,25 @@ public class GeneralView extends JPanel implements View{
 		//위에
 		else if(currentLocationX == 300 && currentLocationY==0) {
 			//보스만나러
+		}	
+	}
+	
+	public void moveNextView(String mapName) {
+		
+	}
+	
+	public void checkCurrentMap() {
+		if(mapName=="ForestView") {
+			//현재 위치가 x=225, y=0이라면 마을로
 		}
-				
+		else if(mapName=="BeachView") {
+			//x>=130 && x<= 550 ,y=이라면 마을로
+		}
+		else if(mapName=="DesertView") {
+			//x=65 && x<=85 y>=390 && y<=410 라면 마을로
+		}
+		else if(mapName=="GeneralView") {
+			
+		}
 	}
 }
