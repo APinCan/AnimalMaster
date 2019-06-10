@@ -40,6 +40,7 @@ public class StartView extends JFrame{
 	Clip clip; //배경음악재생위해 필요
 	
 	GeneralView generalView = new GeneralView();
+	GameSaveView gamesaveView;
 
 	/**
 	 * Launch the application.
@@ -140,8 +141,8 @@ public class StartView extends JFrame{
 	//메뉴만들기
 	void createMenu() {
 		JMenuBar mb = new JMenuBar(); // 메뉴바 생성
-		JMenuItem [] menuItem = new JMenuItem [2];
-		String[] itemTitle = {"SAVE", "EXIT"};
+		JMenuItem [] menuItem = new JMenuItem [3];
+		String[] itemTitle = {"HOME", "SAVE", "EXIT"};
 		JMenu screenMenu = new JMenu("Menu");
 
 		for(int i=0; i<menuItem.length; i++) {
@@ -175,6 +176,8 @@ public class StartView extends JFrame{
 	}
 
 	private void btnLoadListener(ActionEvent e) {
+		clip.close();
+		gamesaveView = new GameSaveView();
 		
 	}
 	
@@ -182,7 +185,15 @@ public class StartView extends JFrame{
 	private void menuActionListener(ActionEvent e) {
 		String message = e.getActionCommand(); 
 		switch(message) { // 메뉴 아이템의 종류 구분
+			/*case"HOME":
+				generalView.setMap("TrainingCityView");
+				setContentPane(generalView);
+				setSize(generalView.getBackgroundImageX(),generalView.getBackgroundImageY());
+				generalView.requestFocus();
+				setLocationRelativeTo(null);
+				break;*/
 			case "SAVE":
+				gamesaveView = new GameSaveView();
 				//세이브할때 처리할 것
 				break;
 			case "EXIT" :

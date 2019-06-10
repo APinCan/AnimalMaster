@@ -26,6 +26,7 @@ public class GeneralView extends JPanel implements View{
 	Clip clip;
 	
 	StartView startView;
+	TrainingCityView trainingcityView;
 	
 	//캐릭터이동관련
 	ImageIcon characterImageIcon;
@@ -44,7 +45,7 @@ public class GeneralView extends JPanel implements View{
 	private Action left= new AbstractAction(LEFT) {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int locationX = charLabel.getX()-25;
+			int locationX = charLabel.getX()-5;
 			int locationY = charLabel.getY();
 			
 			limitBoundary(locationX, locationY);
@@ -57,7 +58,7 @@ public class GeneralView extends JPanel implements View{
 	private Action right=new AbstractAction(RIGHT) {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int locationX = charLabel.getX()+25;
+			int locationX = charLabel.getX()+5;
 			int locationY = charLabel.getY();
 			
 			limitBoundary(locationX, locationY);
@@ -72,7 +73,7 @@ public class GeneralView extends JPanel implements View{
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			int locationX= charLabel.getX();
-			int locationY=charLabel.getY()-25;
+			int locationY=charLabel.getY()-5;
 			
 			limitBoundary(locationX, locationY);
 			moveNextView();
@@ -86,7 +87,7 @@ public class GeneralView extends JPanel implements View{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			int locationX = charLabel.getX();
-			int locationY = charLabel.getY()+25;
+			int locationY = charLabel.getY()+5;
 			
 			limitBoundary(locationX, locationY);
 			moveNextView();
@@ -198,24 +199,29 @@ public class GeneralView extends JPanel implements View{
 		icon = new ImageIcon(imagePath);
 		
 		if(mapName=="ForestView") {
-			this.viewX=768;
-			this.viewY=704;
+			this.viewX=785;
+			this.viewY=770;
+			charLabel.setLocation(225, 100);
 		}
 		else if(mapName=="DesertView"){
-			this.viewX=736;
-			this.viewY=496;
+			this.viewX=755;
+			this.viewY=565;
+			charLabel.setLocation(180, 265);
 		}
 		else if(mapName=="BeachView") {
-			this.viewX=640;
-			this.viewY=960;
+			this.viewX=655;
+			this.viewY=975;
+			charLabel.setLocation(180, 60);
 		}
 		else if(mapName=="TrainingCityView") {
-			this.viewX=640;
-			this.viewY=320;
+			this.viewX=660;
+			this.viewY=390;
+			charLabel.setLocation(5, 120);
 		}
 		else if(mapName=="BattlePhase") {
-			this.viewX=556;
-			this.viewY=371;
+			this.viewX=575;
+			this.viewY=440;
+			charLabel.setLocation(1000, 1000);
 		}
 		
 		playBackgroundMusic();
@@ -232,14 +238,14 @@ public class GeneralView extends JPanel implements View{
 		if(x<0) {
 			charLabel.setLocation(0, y);
 		}
-		else if(x>viewX) {
-			charLabel.setLocation(viewX, y);
+		else if(x>viewX-50) {
+			charLabel.setLocation(viewX-50, y);
 		}
 		else if(y<0) {
 			charLabel.setLocation(x, 0);
 		}
-		else if(y>viewY) {
-			charLabel.setLocation(x, viewY);
+		else if(y>viewY-110) {
+			charLabel.setLocation(x, viewY-110);
 		}
 		else {
 			charLabel.setLocation(x,y);
@@ -251,20 +257,21 @@ public class GeneralView extends JPanel implements View{
 		int currentLocationY = charLabel.getY();
 		
 		//왼쪽
-		if(currentLocationX==0 && currentLocationY==125) {
+		if(currentLocationX==0 && currentLocationY==120) {
 			startView.moveNextMap("ForestView");
 		}
 		//아래
-		else if(currentLocationX==200 && currentLocationY==200) {
+		else if(currentLocationX==250 && currentLocationY==280) {
 			startView.moveNextMap("BeachView");
 		}
 		//오른쪽
-		else if(currentLocationX >= 600 && currentLocationY == 125) {
+		else if(currentLocationX >= 600 && currentLocationY == 120) {
 			startView.moveNextMap("DesertView");
 		}
 		//위에
 		else if(currentLocationX == 300 && currentLocationY==0) {
 			//보스만나러
 		}
+				
 	}
 }
