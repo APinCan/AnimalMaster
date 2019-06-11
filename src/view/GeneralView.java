@@ -78,6 +78,7 @@ public class GeneralView extends JPanel implements View{
 			limitBoundary(locationX, locationY);
 			moveNextView();
 			
+			
 			System.out.println("x :"+charLabel.getX()+", y : "+charLabel.getY());
 		}
 	};
@@ -175,6 +176,9 @@ public class GeneralView extends JPanel implements View{
 		case "TrainingCityView":
 			musicName="TrainingCityWAV.wav";
 			break;
+		case "BossPhase":
+			//여기는 브금없음
+			break;
 		case "BattlePhase":
 			musicName="BattlePhaseDOSWAV.wav";
 			break;
@@ -218,6 +222,12 @@ public class GeneralView extends JPanel implements View{
 			this.viewY=390;
 			charLabel.setLocation(5, 120);
 		}
+		else if(mapName=="BossPhase") {
+			this.viewX=640;
+			this.viewY=1280;
+			//여기 수정필요
+			charLabel.setLocation(400,400);
+		}
 		else if(mapName=="BattlePhase") {
 			this.viewX=575;
 			this.viewY=440;
@@ -259,7 +269,6 @@ public class GeneralView extends JPanel implements View{
 		else {
 			moveToTrainingCityView();
 		}
-		
 	}
 	
 	public void moveToOtherView() {
@@ -281,6 +290,7 @@ public class GeneralView extends JPanel implements View{
 		//위에
 		else if(currentLocationX == 300 && currentLocationY==0) {
 			//보스만나러
+			startView.moveNextMap("BossPhase");
 		}	
 	}
 	
@@ -306,5 +316,12 @@ public class GeneralView extends JPanel implements View{
 				startView.moveNextMap("TrainingCityView");
 			}
 		}
+		else if(mapName=="BossPhase") {
+			//다시 트레이닝시티로 가는 코드작성
+		}
+	}
+	
+	public void setNPCHunter() {
+		
 	}
 }
