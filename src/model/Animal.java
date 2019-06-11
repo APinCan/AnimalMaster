@@ -5,11 +5,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Animal {
 	
 	private int typeid;
-
 	private int hp;
-	private int power; //°ø°Ý·Â
-	private int armor; //¹æ¾î·Â
-	private int evasion; //È¸ÇÇÀ² 1~100 30
+	private int power; //ê³µê²©ë ¥
+	private int armor; //ë°©ì–´ë ¥
+	private int evasion; //íšŒí”¼ìœ¨ 1~100 30
 	
 	public Animal() {
 		this.typeid = 0;
@@ -20,7 +19,7 @@ public class Animal {
 	}
 	
 	public Animal(int hp,int power, int armor, int evasion) {
-
+	public Animal(String name, int hp,int power, int armor, int evasion) {
 		this.hp = hp;
 		this.power = power;
 		this.armor = armor;
@@ -34,8 +33,6 @@ public class Animal {
 	public void settypeid(int typeid) {
 		this.typeid = typeid;
 	}
-
-
 	
 	public int getHp() {
 		return hp;

@@ -3,6 +3,7 @@ package model;
 import java.io.BufferedReader;
 import model.*;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -11,8 +12,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 
 public class FileIO {
 	
@@ -21,18 +23,41 @@ public class FileIO {
 		try {
 			FileWriter fw = new FileWriter(fileName);
 			BufferedWriter bw = new BufferedWriter(fw);
+		//csv ÌååÏùºÏóê Îã§ Ï†ÄÏû•
+		
+			String path="./file/"+fileName;
+		
+			BufferedWriter bw = new BufferedWriter(new FileWriter(path,true));
+			String win = user.getWin();		
+			bw.write(win+"\n");
+			//Ïù¥Í∏¥ Ïï†Îì§ Î¶¨ÌÑ¥
 			
-			bw.write(user.getWin()+"\n");
-			//πª ¥ı ±‚∑œ«“¡ˆ ∞ÌπŒ
+			
+			ArrayList<Animal> animal = user.getCage();
+			Iterator it = animal.iterator();
+			while(it.hasNext()) {
+				Animal ani = (Animal) it.next();
+				String input = ani.getName()+","+ani.getHp()+","+ani.getPower()+","+ani.getPower()+","+ani.getArmor()+","+ani.getEvasion();
+				bw.write(input+"\n");
+			}
+
 			
 			bw.close();
-			fw.close();
-			
-			
-		} catch (IOException e) {
-			throw new IllegalArgumentException("save µ«¡ˆ æ æ“Ω¿¥œ¥Ÿ.");
+		}
+
+		
+	
+	
+	public static String[] listFile() {
+		File dir = new File("./file");
+		File[] fileList = dir.listFiles();
+		
+		String[] output = new String[fileList.length];
+		for(int i=0;i<fileList.length;i++) {
+			output[i]=fileList[i].getName();
 		}
 		
+
 			
 			String animalName = "./animal.csv";		
 			BufferedWriter writer = null;
@@ -77,21 +102,53 @@ public class FileIO {
 		try {
 			FileReader fr = new FileReader(fileName);
 			BufferedReader br = new BufferedReader(fr);
+		return output;
+		//Ìè¥Îçî ÏïàÏùò ÌååÏùº Î¶¨Ïä§Ìä∏ Î™©Î°ù 
+		
+	}
+	
+	
+	public static User load(String fileName) throws IOException {
+		
+		User user = new User();
+		String path = "./file/"+fileName;
+	
+		
+			BufferedReader br = new BufferedReader(new FileReader(path));
 			
-			String win = br.readLine();
-			for(int i=0;i<win.length();i++) {
-				user.setWin(i, win.charAt(i)-'0');
+			String line = br.readLine();
+			String[] ar = line.split(",");
+			//npcÏùò Í∞ØÏàòÎåÄÎ°ú
+			
+
+			for(int i=0;i<5;i++) {
+				char at = ar[0].charAt(0);
+				user.setWin(i,at-'0');
 			}
 			
-			//√ﬂ∞°«“ ∞Õ
+			line = null;			
+			while((line=br.readLine())!=null) {
+				String[] arr = line.split(",");
+				Animal a = new Animal();
+				//name,hp,power,armor,evasion
+				a.setName(arr[0]);
+				a.setHp(Integer.parseInt(arr[1]));
+				a.setPower(Integer.parseInt(arr[2]));
+				a.setArmor(Integer.parseInt(arr[3]));
+				a.setEvasion(Integer.parseInt(arr[4]));
+				
+				user.getCage().add(a);
+				
+			}
+
 			
 			br.close();
-			fr.close();
 			
+
 		} catch (FileNotFoundException e) {
-			throw new IllegalArgumentException("∆ƒ¿œ¿ª πﬂ∞ﬂ«œ¡ˆ ∏¯«ﬂΩ¿¥œ¥Ÿ.");
+			throw new IllegalArgumentException("ÌååÏùºÏùÑ Î∞úÍ≤¨ÌïòÏßÄ Î™ªÌñàÏäµÎãàÎã§.");
 		} catch (IOException e) {
-			throw new IllegalArgumentException("∆ƒ¿œ¿ª ∫“∑Øø¿¡ˆ ∏¯«ﬂΩ¿¥œ¥Ÿ.");
+			throw new IllegalArgumentException("ÌååÏùºÏùÑ Î∂àÎü¨Ïò§ÏßÄ Î™ªÌñàÏäµÎãàÎã§.");
 		}
 		
 		
@@ -111,6 +168,10 @@ public class FileIO {
 			user.getCage().add(a);
 		}
 		
+
+		
+		
+
 		return user;
 	}
 	

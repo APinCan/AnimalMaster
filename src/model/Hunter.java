@@ -4,9 +4,10 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Hunter {
-	public int id; //npc_hunterµéÀÇ ¼ıÀÚ
+	
+	public int id; //npc_hunterë“¤ì˜ ìˆ«ì
 	public ArrayList<Animal> cage;
-	public Animal attacker;
+	private Animal attacker;
 	
 	public Hunter() {
 		cage = new ArrayList<Animal>();
@@ -14,12 +15,14 @@ public class Hunter {
 	}	
 	
 	public void setAttacker(int index) {
-		this.attacker = this.getCage().get(index);
-		//ÇöÀç °ø°İÇÏ´Â ÁÖÀÚ ¼³Á¤
+
+		this.attacker = this.cage.get(index);
+		//í˜„ì¬ ê³µê²©í•˜ëŠ” ì£¼ì ì„¤ì •
 	}
 	
 	public ArrayList<Animal> getCage(){
 		return this.cage;
+
 	}
 	
 	
