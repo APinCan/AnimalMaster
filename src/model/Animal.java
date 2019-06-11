@@ -3,34 +3,39 @@ package model;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Animal {
-	private String name;
+	
+	private int typeid;
+
 	private int hp;
 	private int power; //공격력
 	private int armor; //방어력
 	private int evasion; //회피율 1~100 30
 	
 	public Animal() {
-		this.name="동물";
+		this.typeid = 0;
 		this.hp = 100;
 		this.power = 10;
 		this.armor = 10;
 		this.evasion = 10;
 	}
 	
-	public Animal(String name, int hp,int power, int armor, int evasion) {
+	public Animal(int hp,int power, int armor, int evasion) {
+
 		this.hp = hp;
 		this.power = power;
 		this.armor = armor;
 		this.evasion = evasion;
 	}
 	
-	public String getName() {
-		return this.name;
+	public int gettypeid() {
+		return typeid;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void settypeid(int typeid) {
+		this.typeid = typeid;
 	}
+
+
 	
 	public int getHp() {
 		return hp;
@@ -64,22 +69,9 @@ public class Animal {
 		this.evasion = evasion;
 	}
 	
-	public boolean evade() {
-		//회피 선택시 랜덤으로 회피 성공
-		double percent = this.getEvasion()/100;
-		boolean result = percent > ThreadLocalRandom.current().nextDouble(0,1);
-		//회피율 변수가 랜덤으로 뽑은 double 변수와 비교해서 그보다 작은지를 확인
-		//percent가 0.8일 시 0.8이 넘는 수는 false, 그 이하는 true
-		//true --> 회피 성공 false-->회피 실패
-		return result;
-		
-	}
-	
-	public String toString() {
-		return this.getClass().getSimpleName();
-		//클래스명 가져오기 
-	}
-
-	public void 물기() {}
 
 }
+
+
+
+

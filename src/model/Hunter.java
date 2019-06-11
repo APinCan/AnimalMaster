@@ -13,21 +13,9 @@ public class Hunter {
 		cage.add(new Mouse());
 	}	
 	
-	public void setAttacker(Animal a) {
-		this.attacker = a;
+	public void setAttacker(int index) {
+		this.attacker = this.getCage().get(index);
 		//현재 공격하는 주자 설정
-	}
-	
-	public void attack(Animal target) {
-		this.attacker.물기();
-		int damage = this.attacker.getPower()/2 - target.getArmor()/4;
-		if(target.evade()) return;
-		else target.setHp(target.getHp()-damage); //상대방이 회피 실패했을 경우에만 데미지 들어감 
-	}
-	
-	public boolean run() {
-		//도망
-		return true;
 	}
 	
 	public ArrayList<Animal> getCage(){

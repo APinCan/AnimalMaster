@@ -15,9 +15,9 @@ public class DAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs; 
 	
-	String dbURL="jdbc:mysql://192.168.56.1:3306/javaproject?characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+	String dbURL="jdbc:mysql://localhost:3306/javaproject?characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
 	String dbID="root";
-	String dbPassword="jimin1306";
+	String dbPassword="";
 	
 	public DAO() {
 		try {
@@ -30,6 +30,44 @@ public class DAO {
 			System.out.println("DB에 연결되지 않았습니다.");
 			e.printStackTrace();
 		}
+		create();
+	}
+	
+	public void create() {
+		String query = "CREATE TABLE user(" + 
+				"userid INT NOT NULL AUTO_INCREMENT," + 
+				"npc1 INT NOT NULL," + 
+				"npc2 INT NOT NULL," + 
+				"npc3 INT NOT NULL," + 
+				"npc4 INT NOT NULL," + 
+				"npc5 INT NOT NULL," + 
+				"date DATE NOT NULL," + 
+				"PRIMARY KEY (userid));";
+		try {
+			pstmt = conn.prepareStatement(query);		
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		query = "CREATE TABLE animal("+
+				"userid INT NOT NULL,"+
+				"typeid INT NOT NULL,"+
+				"animalid INT NOT NULL AUTO_INCREMENT,"+
+				"hp INT NOT NULL,"+
+				"power INT NOT NULL,"+
+				"armor INT NOT NULL,"+
+				"evasion INT NOT NULL,"+
+				"PRIMARY KEY (animalid),"+
+				"INDEX userid_idx(userid ASC) VISIBLE,"+
+				"CONSTRAINT userid FOREIGN KEY(userid) REFERENCES user(userid) ON DELETE NO ACTION ON UPDATE NO ACTION);";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
 	}
 	
 	public void save(User user) throws SQLException {
@@ -116,9 +154,7 @@ public class DAO {
 			rs = pstmt.executeQuery();
 
 			while(rs.next()) {
-				System.out.println("bbb");
 				int typeid = rs.getInt("typeid");
-				System.out.println("typeid : "+typeid);
 				Animal ani = returnAnimal(typeid);
 				ani.setHp(rs.getInt(4));
 				ani.setPower(rs.getInt(5));
@@ -153,7 +189,7 @@ public class DAO {
 	
 	public Map printList() {
 		//목록에서 선택할 수 있도록 맵으로 저장해서 가져옴 
-		String query = "SELECT (userid,date_format(date,'%Y%m%d%H')) FROM user";
+		String query = "SELECT userid,date_format(date,'%Y%m%d%H') FROM user";
 		Map<Integer,String> list = new HashMap<Integer,String>();
 		try {
 			pstmt = conn.prepareStatement(query);
