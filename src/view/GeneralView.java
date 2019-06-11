@@ -253,6 +253,16 @@ public class GeneralView extends JPanel implements View{
 	}
 	
 	public void moveNextView() {
+		if(mapName=="TrainingCityView") {
+			moveToOtherView();
+		}
+		else {
+			moveToTrainingCityView();
+		}
+		
+	}
+	
+	public void moveToOtherView() {
 		int currentLocationX = charLabel.getX();
 		int currentLocationY = charLabel.getY();
 		
@@ -274,22 +284,27 @@ public class GeneralView extends JPanel implements View{
 		}	
 	}
 	
-	public void moveNextView(String mapName) {
+	public void moveToTrainingCityView() {
+		int locationX=charLabel.getX();
+		int locationY=charLabel.getY();
 		
-	}
-	
-	public void checkCurrentMap() {
 		if(mapName=="ForestView") {
 			//현재 위치가 x=225, y=0이라면 마을로
+			if(locationX == 225 && locationY==0) {
+				startView.moveNextMap("TrainingCityView");
+			}
 		}
 		else if(mapName=="BeachView") {
+			if((locationX >=130 && locationX<=550) && locationY==0) {
+				startView.moveNextMap("TrainingCityView");
+			}
 			//x>=130 && x<= 550 ,y=이라면 마을로
 		}
 		else if(mapName=="DesertView") {
 			//x=65 && x<=85 y>=390 && y<=410 라면 마을로
-		}
-		else if(mapName=="GeneralView") {
-			
+			if((locationX>=65 && locationX<=85) && (locationY>=390 && locationY<=410)) {
+				startView.moveNextMap("TrainingCityView");
+			}
 		}
 	}
 }
