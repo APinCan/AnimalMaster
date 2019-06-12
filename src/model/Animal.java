@@ -4,6 +4,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Animal {
 	
+	String path=System.getProperty("user.dir");
+	
 	private int typeid;
 	private int hp; //
 	private int maxHp; //동물의 체력
@@ -21,6 +23,10 @@ public class Animal {
 		this.power = 10;
 		this.armor = 10;
 		this.evasion = 10;
+	}
+	
+	public String getImagePath() {
+		return this.imagePath;
 	}
 	
 	public int getPropertyType() {
