@@ -167,11 +167,14 @@ public class GeneralView extends JPanel implements View{
 		
 		switch(mapName) {
 		case "ForestView":
+			musicName="ForestWAV.wav";
 //			musicName;
 			break;
 		case "DesertView":
+			musicName="DesertWAV.wav";
 			break;
 		case "BeachView":
+			musicName="BeachWAV.wav";
 			break;
 		case "TrainingCityView":
 			musicName="TrainingCityWAV.wav";
@@ -226,7 +229,7 @@ public class GeneralView extends JPanel implements View{
 			this.viewX=640;
 			this.viewY=1280;
 			//여기 수정필요
-			charLabel.setLocation(400,400);
+			charLabel.setLocation(305,855);
 		}
 		else if(mapName=="BattlePhase") {
 			this.viewX=575;
@@ -277,7 +280,9 @@ public class GeneralView extends JPanel implements View{
 		
 		//왼쪽
 		if(currentLocationX==0 && currentLocationY==120) {
+			clip.stop();
 			startView.moveNextMap("ForestView");
+			playBackgroundMusic();
 		}
 		//아래
 		else if(currentLocationX==250 && currentLocationY==280) {
@@ -288,7 +293,7 @@ public class GeneralView extends JPanel implements View{
 			startView.moveNextMap("DesertView");
 		}
 		//위에
-		else if(currentLocationX == 300 && currentLocationY==0) {
+		else if(currentLocationX == 250 && currentLocationY==0) {
 			//보스만나러
 			startView.moveNextMap("BossPhase");
 		}	
@@ -301,7 +306,9 @@ public class GeneralView extends JPanel implements View{
 		if(mapName=="ForestView") {
 			//현재 위치가 x=225, y=0이라면 마을로
 			if(locationX == 225 && locationY==0) {
+				clip.stop();
 				startView.moveNextMap("TrainingCityView");
+				playBackgroundMusic();
 			}
 		}
 		else if(mapName=="BeachView") {
