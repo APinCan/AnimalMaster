@@ -28,14 +28,14 @@ public class GeneralView extends JPanel implements View{
 	StartView startView;
 	TrainingCityView trainingcityView;
 	
-	//Ä³¸¯ÅÍÀÌµ¿°ü·Ã
+	//ìºë¦­í„°ì´ë™ê´€ë ¨
 	ImageIcon characterImageIcon;
 	Image charImage;
 	String charPath;
 	JLabel charLabel;
 	
 	/*
-	 * Å°º¸µå ¸®½º³Ê binding
+	 * í‚¤ë³´ë“œ ë¦¬ìŠ¤ë„ˆ binding
 	 */
 	private static final String LEFT="Left";
 	private static final String RIGHT="Right";
@@ -98,7 +98,7 @@ public class GeneralView extends JPanel implements View{
 	};
 	
 	/*
-	 * ºä»ı¼º
+	 * ë·°ìƒì„±
 	 */
 	public GeneralView() {
 		this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), LEFT);
@@ -112,7 +112,7 @@ public class GeneralView extends JPanel implements View{
 		
 		this.setLayout(null);
 		
-		//Ä³¸¯ÅÍ Ãß°¡
+		//ìºë¦­í„° ì¶”ê°€
 		charPath=path+"/src/Image/Hunter.jpg";
 		characterImageIcon=new ImageIcon(charPath);
 		charImage=characterImageIcon.getImage();
@@ -166,7 +166,7 @@ public class GeneralView extends JPanel implements View{
 		try {
 			clip.close();
 		} catch(NullPointerException e) {
-			System.out.println("¼³Á¤µÈ bgmÀÌ ¾ø½À´Ï´Ù");
+			System.out.println("ì„¤ì •ëœ bgmì´ ì—†ìŠµë‹ˆë‹¤");
 		}
 
 		String musicName="";
@@ -186,7 +186,7 @@ public class GeneralView extends JPanel implements View{
 			musicName="TrainingCityWAV.wav";
 			break;
 		case "BossPhase":
-			//¿©±â´Â ºê±İ¾øÀ½
+			//ì—¬ê¸°ëŠ” ë¸Œê¸ˆì—†ìŒ
 			break;
 		case "BattlePhase":
 			musicName="BattlePhaseDOSWAV.wav";
@@ -234,7 +234,7 @@ public class GeneralView extends JPanel implements View{
 		else if(mapName=="BossPhase") {
 			this.viewX=640;
 			this.viewY=1280;
-			//¿©±â ¼öÁ¤ÇÊ¿ä
+			//ì—¬ê¸° ìˆ˜ì •í•„ìš”
 			charLabel.setLocation(305,855);
 		}
 		else if(mapName=="BattlePhase") {
@@ -244,7 +244,7 @@ public class GeneralView extends JPanel implements View{
 		}
 		
 		playBackgroundMusic();
-		//¸ÊÀÇ »çÀÌÁî ¼³Á¤
+		//ë§µì˜ ì‚¬ì´ì¦ˆ ì„¤ì •
 //		setSize(this.viewX, this.viewY);
 	}
 	
@@ -252,7 +252,7 @@ public class GeneralView extends JPanel implements View{
 		this.startView=startView;
 	}
 	
-	//¸ÊÀÇ boundary¸¦ ¼³Á¤ÇØ ±× ¹ÛÀ¸·Î ¸ø³ª°¡°Ô ÇÔ
+	//ë§µì˜ boundaryë¥¼ ì„¤ì •í•´ ê·¸ ë°–ìœ¼ë¡œ ëª»ë‚˜ê°€ê²Œ í•¨
 	private void limitBoundary(int x, int y) {
 		if(x<0) {
 			charLabel.setLocation(0, y);
@@ -284,23 +284,23 @@ public class GeneralView extends JPanel implements View{
 		int currentLocationX = charLabel.getX();
 		int currentLocationY = charLabel.getY();
 		
-		//¿ŞÂÊ
+		//ì™¼ìª½
 		if(currentLocationX==0 && currentLocationY==120) {
 			clip.stop();
 			startView.moveNextMap("ForestView");
 			playBackgroundMusic();
 		}
-		//¾Æ·¡
+		//ì•„ë˜
 		else if(currentLocationX==250 && currentLocationY==280) {
 			startView.moveNextMap("BeachView");
 		}
-		//¿À¸¥ÂÊ
+		//ì˜¤ë¥¸ìª½
 		else if(currentLocationX >= 600 && currentLocationY == 120) {
 			startView.moveNextMap("DesertView");
 		}
-		//À§¿¡
+		//ìœ„ì—
 		else if(currentLocationX == 250 && currentLocationY==0) {
-			//º¸½º¸¸³ª·¯
+			//ë³´ìŠ¤ë§Œë‚˜ëŸ¬
 			startView.moveNextMap("BossPhase");
 		}	
 	}
@@ -310,7 +310,7 @@ public class GeneralView extends JPanel implements View{
 		int locationY=charLabel.getY();
 		
 		if(mapName=="ForestView") {
-			//ÇöÀç À§Ä¡°¡ x=225, y=0ÀÌ¶ó¸é ¸¶À»·Î
+			//í˜„ì¬ ìœ„ì¹˜ê°€ x=225, y=0ì´ë¼ë©´ ë§ˆì„ë¡œ
 			if(locationX == 225 && locationY==0) {
 				clip.stop();
 				startView.moveNextMap("TrainingCityView");
@@ -321,20 +321,40 @@ public class GeneralView extends JPanel implements View{
 			if((locationX >=130 && locationX<=550) && locationY==0) {
 				startView.moveNextMap("TrainingCityView");
 			}
-			//x>=130 && x<= 550 ,y=ÀÌ¶ó¸é ¸¶À»·Î
+			//x>=130 && x<= 550 ,y=ì´ë¼ë©´ ë§ˆì„ë¡œ
 		}
 		else if(mapName=="DesertView") {
-			//x=65 && x<=85 y>=390 && y<=410 ¶ó¸é ¸¶À»·Î
+			//x=65 && x<=85 y>=390 && y<=410 ë¼ë©´ ë§ˆì„ë¡œ
 			if((locationX>=65 && locationX<=85) && (locationY>=390 && locationY<=410)) {
 				startView.moveNextMap("TrainingCityView");
 			}
 		}
 		else if(mapName=="BossPhase") {
-			//´Ù½Ã Æ®·¹ÀÌ´×½ÃÆ¼·Î °¡´Â ÄÚµåÀÛ¼º
+			//ë‹¤ì‹œ íŠ¸ë ˆì´ë‹ì‹œí‹°ë¡œ ê°€ëŠ” ì½”ë“œì‘ì„±
 		}
 	}
 	
 	public void setNPCHunter() {
 		
+	}
+	
+	//ì• ë‹ˆë©€ ë§Œë‚¬ëŠ”ì§€ í™•ì¸ìš© -> ë§µ ì¸ìŠ¤í„´ìŠ¤ í• ë•Œ ì“°ë ˆë“œ ì‹¤í–‰ì‹œì¼œì¤˜ì•¼ë¨
+	private class meetAnimalThread extends Thread{
+		Controler con = Controler.getInstance();
+		public void run() {
+			Animal popAnimal = null;
+			while(true) {
+				popAnimal = con.meetAnimal();
+				if(popAnimal != null) {
+					break;
+				}
+				try {
+					Thread.sleep(1000); //1ì´ˆ ëŒ€ê¸°
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			// ì—¬ê¸°ì„œ ë§µì „í™˜ popAnimal ì´ ë§Œë‚œ ì• ë‹ˆë©€
+		}
 	}
 }
