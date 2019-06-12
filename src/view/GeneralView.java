@@ -18,6 +18,9 @@ import javax.swing.KeyStroke;
 
 import com.sun.glass.events.KeyEvent;
 
+import controller.Controler;
+import model.Animal;
+
 public class GeneralView extends JPanel implements View{
 	private int viewX=0;
 	private int viewY=0;
@@ -28,14 +31,14 @@ public class GeneralView extends JPanel implements View{
 	StartView startView;
 	TrainingCityView trainingcityView;
 	
-	//캐릭터이동관련
+	//罹먮┃�꽣�씠�룞愿��젴
 	ImageIcon characterImageIcon;
 	Image charImage;
 	String charPath;
 	JLabel charLabel;
 	
 	/*
-	 * 키보드 리스너 binding
+	 * �궎蹂대뱶 由ъ뒪�꼫 binding
 	 */
 	private static final String LEFT="Left";
 	private static final String RIGHT="Right";
@@ -98,7 +101,7 @@ public class GeneralView extends JPanel implements View{
 	};
 	
 	/*
-	 * 뷰생성
+	 * 酉곗깮�꽦
 	 */
 	public GeneralView() {
 		this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), LEFT);
@@ -112,7 +115,7 @@ public class GeneralView extends JPanel implements View{
 		
 		this.setLayout(null);
 		
-		//캐릭터 추가
+		//罹먮┃�꽣 異붽�
 		charPath=path+"/src/Image/Hunter.jpg";
 		characterImageIcon=new ImageIcon(charPath);
 		charImage=characterImageIcon.getImage();
@@ -166,7 +169,7 @@ public class GeneralView extends JPanel implements View{
 		try {
 			clip.close();
 		} catch(NullPointerException e) {
-			System.out.println("설정된 bgm이 없습니다");
+			System.out.println("�꽕�젙�맂 bgm�씠 �뾾�뒿�땲�떎");
 		}
 
 		String musicName="";
@@ -174,7 +177,6 @@ public class GeneralView extends JPanel implements View{
 		switch(mapName) {
 		case "ForestView":
 			musicName="ForestWAV.wav";
-//			musicName;
 			break;
 		case "DesertView":
 			musicName="DesertWAV.wav";
@@ -186,7 +188,7 @@ public class GeneralView extends JPanel implements View{
 			musicName="TrainingCityWAV.wav";
 			break;
 		case "BossPhase":
-			//여기는 브금없음
+			//�뿬湲곕뒗 釉뚭툑�뾾�쓬
 			break;
 		case "BattlePhase":
 			musicName="BattlePhaseDOSWAV.wav";
@@ -234,17 +236,12 @@ public class GeneralView extends JPanel implements View{
 		else if(mapName=="BossPhase") {
 			this.viewX=640;
 			this.viewY=1280;
-			//여기 수정필요
+			//�뿬湲� �닔�젙�븘�슂
 			charLabel.setLocation(305,855);
-		}
-		else if(mapName=="BattlePhase") {
-			this.viewX=575;
-			this.viewY=440;
-			charLabel.setLocation(1000, 1000);
 		}
 		
 		playBackgroundMusic();
-		//맵의 사이즈 설정
+		//留듭쓽 �궗�씠利� �꽕�젙
 //		setSize(this.viewX, this.viewY);
 	}
 	
@@ -252,7 +249,7 @@ public class GeneralView extends JPanel implements View{
 		this.startView=startView;
 	}
 	
-	//맵의 boundary를 설정해 그 밖으로 못나가게 함
+	//留듭쓽 boundary瑜� �꽕�젙�빐 洹� 諛뽰쑝濡� 紐삳굹媛�寃� �븿
 	private void limitBoundary(int x, int y) {
 		if(x<0) {
 			charLabel.setLocation(0, y);
@@ -284,23 +281,23 @@ public class GeneralView extends JPanel implements View{
 		int currentLocationX = charLabel.getX();
 		int currentLocationY = charLabel.getY();
 		
-		//왼쪽
+		//�쇊履�
 		if(currentLocationX==0 && currentLocationY==120) {
 			clip.stop();
 			startView.moveNextMap("ForestView");
 			playBackgroundMusic();
 		}
-		//아래
+		//�븘�옒
 		else if(currentLocationX==250 && currentLocationY==280) {
 			startView.moveNextMap("BeachView");
 		}
-		//오른쪽
+		//�삤瑜몄そ
 		else if(currentLocationX >= 600 && currentLocationY == 120) {
 			startView.moveNextMap("DesertView");
 		}
-		//위에
+		//�쐞�뿉
 		else if(currentLocationX == 250 && currentLocationY==0) {
-			//보스만나러
+			//蹂댁뒪留뚮굹�윭
 			startView.moveNextMap("BossPhase");
 		}	
 	}
@@ -310,7 +307,7 @@ public class GeneralView extends JPanel implements View{
 		int locationY=charLabel.getY();
 		
 		if(mapName=="ForestView") {
-			//현재 위치가 x=225, y=0이라면 마을로
+			//�쁽�옱 �쐞移섍� x=225, y=0�씠�씪硫� 留덉쓣濡�
 			if(locationX == 225 && locationY==0) {
 				clip.stop();
 				startView.moveNextMap("TrainingCityView");
@@ -321,16 +318,16 @@ public class GeneralView extends JPanel implements View{
 			if((locationX >=130 && locationX<=550) && locationY==0) {
 				startView.moveNextMap("TrainingCityView");
 			}
-			//x>=130 && x<= 550 ,y=이라면 마을로
+			//x>=130 && x<= 550 ,y=�씠�씪硫� 留덉쓣濡�
 		}
 		else if(mapName=="DesertView") {
-			//x=65 && x<=85 y>=390 && y<=410 라면 마을로
+			//x=65 && x<=85 y>=390 && y<=410 �씪硫� 留덉쓣濡�
 			if((locationX>=65 && locationX<=85) && (locationY>=390 && locationY<=410)) {
 				startView.moveNextMap("TrainingCityView");
 			}
 		}
 		else if(mapName=="BossPhase") {
-			//다시 트레이닝시티로 가는 코드작성
+			//�떎�떆 �듃�젅�씠�떇�떆�떚濡� 媛��뒗 肄붾뱶�옉�꽦
 		}
 	}
 	
@@ -338,7 +335,7 @@ public class GeneralView extends JPanel implements View{
 		
 	}
 	
-	//애니멀 만났는지 확인용 -> 맵 인스턴스 할때 쓰레드 실행시켜줘야됨
+	//�븷�땲硫� 留뚮궗�뒗吏� �솗�씤�슜 -> 留� �씤�뒪�꽩�뒪 �븷�븣 �벐�젅�뱶 �떎�뻾�떆耳쒖쨾�빞�맖
 	private class meetAnimalThread extends Thread{
 		Controler con = Controler.getInstance();
 		public void run() {
@@ -349,12 +346,12 @@ public class GeneralView extends JPanel implements View{
 					break;
 				}
 				try {
-					Thread.sleep(1000); //1초 대기
+					Thread.sleep(1000); //1珥� ��湲�
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			// 여기서 맵전환 popAnimal 이 만난 애니멀
+			// �뿬湲곗꽌 留듭쟾�솚 popAnimal �씠 留뚮궃 �븷�땲硫�
 		}
 	}
 }

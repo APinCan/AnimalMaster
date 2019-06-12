@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class ForestView extends JPanel implements View {
+public class ForestView extends MapView {
 	private int viewX=768;
 	private int viewY=704;
 	private String mapName;

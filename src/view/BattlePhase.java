@@ -30,7 +30,7 @@ public class BattlePhase extends JPanel implements View {
 	
 	@Override
 	public void setMapSize(String mapName) {
-		String imagePath=path+"/src/Image/"+mapName+".jpg";
+		String imagePath=path+"/src/Image/"+"BattlePhase"+".jpg";
 		icon=new ImageIcon(imagePath);
 		
 		setSize(viewX, viewY);
@@ -53,9 +53,4 @@ public class BattlePhase extends JPanel implements View {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public void startBattle() {
-		
-	}
-	
 }
