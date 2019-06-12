@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class User extends Hunter {
 	public int[] win;
 	
@@ -8,18 +10,15 @@ public class User extends Hunter {
 	}
 	
 	public void setWin(int id, int win) {
-		this.win[id] = win; //hunter[id]¿¡°Ô ÀÌ°åÀ» ½Ã 1¼³Á¤ 
+		this.win[id] = win; //hunter[id]Â¿Â¡Â°Ã” Ã€ÃŒÂ°Ã¥Ã€Â» Â½Ãƒ 1Â¼Â³ÃÂ¤ 
 	}
 	
-	public String getWin() {
-		String output = "";
-		int i=0;
-		while(true) {
-			output+=Integer.toString(this.win[i]);
-			i++;
-			if(i==win.length-1) break;
-			output+=",";
-		}
-		return output;
-	}	
+
+	public int[] getWin() {
+		return this.win;
+	}
+	
+	
+	
 }
+

@@ -1,19 +1,24 @@
 package model;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Map;
+
 public class main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
+
+		
 		User user = new User();
 		user.setWin(0,0);
 		user.setWin(1,1);
 		
-		System.out.println(user.getWin());
-		FileIO.save(user, "memory3.txt");
-		user.setWin(4,1);
-		FileIO.load(user, "memory3.txt");
 	
-		System.out.println(user.getWin());
-	
+		DAO dao = new DAO();
+		dao.save(user);
+		Map<Integer, String> list = dao.printList();
+		System.out.println(list.keySet());
+		dao.load(1);
 		
 	}
 

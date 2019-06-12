@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Hunter {
 	
-	public int id; //npc_hunterµéÀÇ ¼ıÀÚ
+	public int id; //npc_hunterë“¤ì˜ ìˆ«ì
 	public ArrayList<Animal> cage;
 	private Animal attacker;
 	
@@ -15,19 +15,14 @@ public class Hunter {
 	}	
 	
 	public void setAttacker(int index) {
+
 		this.attacker = this.cage.get(index);
-		//ÇöÀç °ø°İÇÏ´Â ÁÖÀÚ ¼³Á¤
+		//í˜„ì¬ ê³µê²©í•˜ëŠ” ì£¼ì ì„¤ì •
 	}
 	
 	public ArrayList<Animal> getCage(){
 		return this.cage;
-	}
-	
-	public void attack(Animal target) {
-		this.attacker.¹°±â();
-		int damage = this.attacker.getPower()/2 - target.getArmor()/4;
-		if(target.evade()) return;
-		else target.setHp(target.getHp()-damage); //»ó´ë¹æÀÌ È¸ÇÇ ½ÇÆĞÇßÀ» °æ¿ì¿¡¸¸ µ¥¹ÌÁö µé¾î°¨ 
+
 	}
 	
 	

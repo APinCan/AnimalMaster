@@ -3,34 +3,35 @@ package model;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Animal {
-	private String name;
+	
+	private int typeid;
 	private int hp;
-	private int power; //°ø°Ý·Â
-	private int armor; //¹æ¾î·Â
-	private int evasion; //È¸ÇÇÀ² 1~100 30
+	private int power; //ê³µê²©ë ¥
+	private int armor; //ë°©ì–´ë ¥
+	private int evasion; //íšŒí”¼ìœ¨ 1~100 30
 	
 	public Animal() {
-		this.name = null;
+		this.typeid = 0;
 		this.hp = 100;
 		this.power = 10;
 		this.armor = 10;
 		this.evasion = 10;
 	}
 	
+	public Animal(int hp,int power, int armor, int evasion) {
 	public Animal(String name, int hp,int power, int armor, int evasion) {
-		this.name = name;
 		this.hp = hp;
 		this.power = power;
 		this.armor = armor;
 		this.evasion = evasion;
 	}
 	
-	public String getName() {
-		return this.name;
+	public int gettypeid() {
+		return typeid;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void settypeid(int typeid) {
+		this.typeid = typeid;
 	}
 	
 	public int getHp() {
@@ -65,17 +66,9 @@ public class Animal {
 		this.evasion = evasion;
 	}
 	
-	public boolean evade() {
-		//È¸ÇÇ ¼±ÅÃ½Ã ·£´ýÀ¸·Î È¸ÇÇ ¼º°ø
-		double percent = this.getEvasion()/100;
-		boolean result = percent > ThreadLocalRandom.current().nextDouble(0,1);
-		//È¸ÇÇÀ² º¯¼ö°¡ ·£´ýÀ¸·Î »ÌÀº double º¯¼ö¿Í ºñ±³ÇØ¼­ ±×º¸´Ù ÀÛÀºÁö¸¦ È®ÀÎ
-		//percent°¡ 0.8ÀÏ ½Ã 0.8ÀÌ ³Ñ´Â ¼ö´Â false, ±× ÀÌÇÏ´Â true
-		//true --> È¸ÇÇ ¼º°ø false-->È¸ÇÇ ½ÇÆÐ
-		return result;
-		
-	}
-
-	public void ¹°±â() {}
 
 }
+
+
+
+
