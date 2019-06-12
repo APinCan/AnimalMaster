@@ -163,6 +163,12 @@ public class GeneralView extends JPanel implements View{
 	
 	@Override
 	public void playBackgroundMusic() {
+		try {
+			clip.close();
+		} catch(NullPointerException e) {
+			System.out.println("설정된 bgm이 없습니다");
+		}
+
 		String musicName="";
 		
 		switch(mapName) {
