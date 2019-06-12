@@ -1,23 +1,26 @@
 package view;
 
 import java.awt.Graphics;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import model.Animal;
+import model.Hunter;
+import model.User;
+
 public class BattlePhase extends JPanel implements View {
-	private int viewX=556;
-	private int viewY=371;
-	private String mapName;
+	private int viewX=575;
+	private int viewY=440;
 	ImageIcon icon;
+	Clip clip;
 	
 	public BattlePhase() {
 		
-	}
-	
-	public BattlePhase(String mapName) {
-		this.mapName=mapName;
-		setMapSize(mapName);
 	}
 
 	@Override
@@ -29,11 +32,12 @@ public class BattlePhase extends JPanel implements View {
 	}
 	
 	@Override
-	public void setMapSize(String mapName) {
-		String imagePath=path+"/src/Image/"+mapName+".jpg";
+	public void setMap(String mapName) {
+		String imagePath=path+"/src/Image/"+"BattlePhase"+".jpg";
 		icon=new ImageIcon(imagePath);
 		
 		setSize(viewX, viewY);
+		playBackgroundMusic();
 	}
 
 	@Override
@@ -51,11 +55,25 @@ public class BattlePhase extends JPanel implements View {
 	@Override
 	public void playBackgroundMusic() {
 		// TODO Auto-generated method stub
-		
+		String mediaPath=path+"\\src\\Music\\"+"BattlePhaseDOSWAV.wav";
+		try {
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(mediaPath).getAbsoluteFile());
+			clip = AudioSystem.getClip();
+			clip.open(audioIn);
+			clip.loop(5);
+			clip.start();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("No Music!");
+		}
 	}
 	
-	public void startBattle() {
-		
+	public void setMapCharacter(User user, Animal animal) {
+		this.setMap("BattlePhase");
+	}
+	
+	public void setMapCharacter(User user, Hunter player) {
+		this.setMap("BattlePhase");
 	}
 	
 }

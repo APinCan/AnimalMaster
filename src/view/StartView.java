@@ -14,6 +14,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+
+import model.Animal;
+import model.Hunter;
+import model.User;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -41,6 +46,7 @@ public class StartView extends JFrame{
 	
 	GeneralView generalView = new GeneralView();
 	GameSaveView gamesaveView;
+	BattlePhase battlePhase = new BattlePhase();
 
 	/**
 	 * Launch the application.
@@ -204,12 +210,38 @@ public class StartView extends JFrame{
 	}
 	
 	public void moveNextMap(String nextMap) {
-		generalView.setMap(nextMap);
-		setContentPane(generalView);
-		setSize(generalView.getBackgroundImageX(), generalView.getBackgroundImageY());
-		
-		generalView.requestFocus();
+//		if(nextMap.equals("BattlePhase")) {
+//			battlePhase.setMapCharacter();
+//			setContentPane(battlePhase);
+//			setSize(battlePhase.getBackgroundImageX(), battlePhase.getBackgroundImageY());
+//			battlePhase.requestFocus();
+//		}
+//		else {
+			generalView.setMap(nextMap);
+			setContentPane(generalView);
+			setSize(generalView.getBackgroundImageX(), generalView.getBackgroundImageY());
+			generalView.requestFocus();
+//		}
+
+		setLocationRelativeTo(null);
+	}
+	
+	public void moveBattlePhase(User user, Animal animal) {
+		battlePhase.setMapCharacter(user, animal);
+		setContentPane(battlePhase);
+		setSize(battlePhase.getBackgroundImageX(), battlePhase.getBackgroundImageY());
+		battlePhase.requestFocus();
 		
 		setLocationRelativeTo(null);
 	}
+	
+	public void moveBattlePhase(User user, Hunter hunter) {
+		battlePhase.setMapCharacter(user, hunter);
+		setContentPane(battlePhase);
+		setSize(battlePhase.getBackgroundImageX(), battlePhase.getBackgroundImageY());
+		battlePhase.requestFocus();
+		
+		setLocationRelativeTo(null);
+	}
+
 }
