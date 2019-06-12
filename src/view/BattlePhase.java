@@ -7,6 +7,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Animal;
@@ -18,6 +19,10 @@ public class BattlePhase extends JPanel implements View {
 	private int viewY=440;
 	ImageIcon icon;
 	Clip clip;
+	
+	//동물
+	ImageIcon myAnimalIcon;
+	JLabel yourAnimalLabel = new JLabel();
 	
 	public BattlePhase() {
 		
@@ -70,10 +75,22 @@ public class BattlePhase extends JPanel implements View {
 	
 	public void setMapCharacter(User user, Animal animal) {
 		this.setMap("BattlePhase");
+		//가져온 애니멀이 어떤동물인가 알아보기
 	}
 	
 	public void setMapCharacter(User user, Hunter player) {
 		this.setMap("BattlePhase");
 	}
 	
+	
+	public void setYourAnimal(Animal animal) {
+		//애니멀이 무엇인가?
+//		String animal = animal.name;
+//		String imagePath= path+"/src/Image/"+aniaml+".gif";
+		
+//		ImageIcon yourAnimalIcon = new ImageIcon(imagePath);
+//		yourAnimalLabel.setIcon(yourAnimalIcon);
+//		this.add(yourAnimalLabel);
+//		setLocation();
+	}
 }

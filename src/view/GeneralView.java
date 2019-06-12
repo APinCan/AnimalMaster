@@ -238,17 +238,17 @@ public class GeneralView extends JPanel implements View{
 		if(mapName=="ForestView") {
 			this.viewX=785;
 			this.viewY=770;
-			charLabel.setLocation(225, 100);
+//			charLabel.setLocation(225, 100);
 		}
 		else if(mapName=="DesertView"){
 			this.viewX=755;
 			this.viewY=565;
-			charLabel.setLocation(180, 265);
+//			charLabel.setLocation(180, 265);
 		}
 		else if(mapName=="BeachView") {
 			this.viewX=655;
 			this.viewY=975;
-			charLabel.setLocation(180, 60);
+//			charLabel.setLocation(180, 60);
 		}
 		else if(mapName=="TrainingCityView") {
 			this.viewX=660;
@@ -259,7 +259,7 @@ public class GeneralView extends JPanel implements View{
 			this.viewX=640;
 			this.viewY=1280;
 			//占싼덈┛ 占쏙옙占쏙옙占쏙옙占쏙옙
-			charLabel.setLocation(305,855);
+//			charLabel.setLocation(305,855);
 		}
 //		else if(mapName=="BattlePhase") {
 //			this.viewX=575;
@@ -318,22 +318,26 @@ public class GeneralView extends JPanel implements View{
 		
 		//占쎌눘�걹
 		if(currentLocationX==0 && currentLocationY==120) {
-			clip.stop();
+//			clip.stop();
 			startView.moveNextMap("ForestView");
-			playBackgroundMusic();
+			charLabel.setLocation(225, 100);
+//			playBackgroundMusic();
 		}
 		//占쏙옙占쏙옙
 		else if(currentLocationX==250 && currentLocationY==280) {
 			startView.moveNextMap("BeachView");
+			charLabel.setLocation(180, 60);
 		}
 		//占썬끇�뀲筌잞옙
 		else if(currentLocationX >= 600 && currentLocationY == 120) {
 			startView.moveNextMap("DesertView");
+			charLabel.setLocation(180, 265);
 		}
 		//占쏙옙占쏙옙
 		else if(currentLocationX == 250 && currentLocationY==0) {
 			//癰귣똻占썬끇占쏙옙占쏙옙占�
 			startView.moveNextMap("BossPhase");
+			charLabel.setLocation(305,855);
 			setNPCHunter();
 		}	
 	}
@@ -345,14 +349,17 @@ public class GeneralView extends JPanel implements View{
 		if(mapName=="ForestView") {
 			//占쏙옙占쏙옙 占쏙옙燁삼옙揶쏉옙 x=225, y=0占쎈�占쎌눖�늺 筌랃옙占쏙옙嚥∽옙
 			if(locationX == 225 && locationY==0) {
-				clip.stop();
+//				clip.stop();
 				startView.moveNextMap("TrainingCityView");
-				playBackgroundMusic();
+				charLabel.setLocation(10, 120);
+//				playBackgroundMusic();
 			}
 		}
 		else if(mapName=="BeachView") {
 			if((locationX >=130 && locationX<=550) && locationY==0) {
 				startView.moveNextMap("TrainingCityView");
+				charLabel.setLocation(250, 270);
+				
 			}
 			//x>=130 && x<= 550 ,y=占쎈�占쎌눖�늺 筌랃옙占쏙옙嚥∽옙
 		}
@@ -360,11 +367,16 @@ public class GeneralView extends JPanel implements View{
 			//x=65 && x<=85 y>=390 && y<=410 占쎌눖�늺 筌랃옙占쏙옙嚥∽옙
 			if((locationX>=65 && locationX<=85) && (locationY>=390 && locationY<=410)) {
 				startView.moveNextMap("TrainingCityView");
+				charLabel.setLocation(590, 120);
 			}
 		}
-		else if(mapName=="BossPhase") {
-			//占썬끉占쏙옙 占쎈챶占쏙옙占쎈�占쏙옙占쏙옙占쎄퀡占� 揶쏉옙占쏙옙 �굜占쏙옙占쏙옙占쏙옙占�
-		}
+//		else if(mapName=="BossPhase") {
+//			//占썬끉占쏙옙 占쎈챶占쏙옙占쎈�占쏙옙占쏙옙占쎄퀡占� 揶쏉옙占쏙옙 �굜占쏙옙占쏙옙占쏙옙占�
+//			if((locationX>=285 && locationX<=340) && locationY==860) {
+//				startView.moveNextMap("TrainingCityView");
+//				charLabel.setLocation(250, 10);
+//			}
+//		}
 	}
 	
 	public void moveToBossPhase() {
@@ -391,6 +403,15 @@ public class GeneralView extends JPanel implements View{
 				//癰귣똻占썬끇占쏙옙占쏙옙占�
 				startView.moveBattlePhase(user, hunter);
 			}	
+			else if((currentLocationX>=285 && currentLocationX<=340) && currentLocationY==860){
+				startView.moveNextMap("TrainingCityView");
+				charLabel.setLocation(250, 10);
+				npc1Label.setVisible(false);
+				npc2Label.setVisible(false);
+				npc3Label.setVisible(false);
+				npc4Label.setVisible(false);
+				bossLabel.setVisible(false);
+			}
 		}
 		
 	}
