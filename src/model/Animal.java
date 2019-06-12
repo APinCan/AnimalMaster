@@ -14,7 +14,6 @@ public class Animal {
 	public int propertyType; //동물의 속성  0:물  1:사막  2:숲
 	public String imagePath;
 	
-	//이번턴에 어떤 행동을 할 것인지 선택할 공격, 방어, 회피 
 	
 	public Animal() {
 		this.typeid = 0;
@@ -55,7 +54,6 @@ public class Animal {
 		this.armor = armor;
 		this.evasion = evasion;
 	}
-	
 
 	public int gettypeid() {
 		return typeid;
@@ -65,7 +63,6 @@ public class Animal {
 		this.typeid = typeid;
 	}
 
-	
 	public int getHp() {
 		return hp;
 	}

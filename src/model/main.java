@@ -15,10 +15,10 @@ public class main {
 		
 	
 		DAO dao = new DAO();
-		dao.save(user);
+		dao.save(user,1);
 		Map<Integer, String> list = dao.printList();
 		System.out.println(list.keySet());
-		dao.load(1);
+		User u = dao.load(1);
 		
 	}
 

@@ -5,20 +5,18 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Hunter {
 	
-	public int id; //npc_hunterµéÀÇ ¼ıÀÚ
+	public int id; //npc_hunterï¿½ë±¾ï¿½ì“½ ï¿½ë‹½ï¿½ì˜„
 	public ArrayList<Animal> cage;
 	private Animal attacker;
-	
+
 	
 	public Hunter() {
 		cage = new ArrayList<Animal>();
-		cage.add(new Mouse());
 	}	
 	
 	public void setAttacker(int index) {
 
 		this.attacker = this.cage.get(index);
-		//ÇöÀç °ø°İÇÏ´Â ÁÖÀÚ ¼³Á¤
 	}
 	
 	public ArrayList<Animal> getCage(){

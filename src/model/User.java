@@ -10,9 +10,9 @@ public class User extends Hunter {
 	}
 	
 	public void setWin(int id, int win) {
-		this.win[id] = win; //hunter[id]¿¡°Ô ÀÌ°åÀ» ½Ã 1¼³Á¤ 
+		this.win[id] = win; //hunter[id]ì©”ì§•ì§¸íšš ï¿½íš‘ì§¸ì±…ï¿½ì¨© ì©íš„ 1ì©Œì¨€íšì§š 
 	}
-	
+
 	public int[] getWin() {
 		return this.win;
 	}
