@@ -354,7 +354,7 @@ public class GeneralView extends JPanel implements View{
 					e.printStackTrace();
 				}
 			}
-			// 여기서 맵전환 popAnimal 이 만난 애니멀
+			// 여기서 맵전환 popAnimal 이 만난 애니멀 
 		}
 	}
 }
