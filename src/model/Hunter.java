@@ -9,6 +9,7 @@ public class Hunter {
 	public ArrayList<Animal> cage;
 	private Animal attacker;
 	
+	
 	public Hunter() {
 		cage = new ArrayList<Animal>();
 		cage.add(new Mouse());
@@ -25,6 +26,6 @@ public class Hunter {
 
 	}
 	
-	
+
 
 }

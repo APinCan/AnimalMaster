@@ -17,6 +17,4 @@ public class User extends Hunter {
 		return this.win;
 	}
 	
-	
-	
 }
