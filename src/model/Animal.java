@@ -4,11 +4,18 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Animal {
 	
+	String path=System.getProperty("user.dir");
+	
 	private int typeid;
-	private int hp;
-	private int power; //ê³µê²©ë ¥
-	private int armor; //ë°©ì–´ë ¥
-	private int evasion; //íšŒí”¼ìœ¨ 1~100 30
+	private int hp; //
+	private int maxHp; //µ¿¹°ÀÇ Ã¼·Â
+	private int power; //°ø°Ý·Â
+	private int armor; //¹æ¾î·Â
+	private int evasion; //È¸ÇÇÀ² 1~100 30
+	public int actionType; //ÀÌ¹øÅÏ¿¡ ÃëÇÒ Çàµ¿ 
+	public int propertyType; //µ¿¹°ÀÇ ¼Ó¼º  0:¹°  1:»ç¸·  2:½£
+	public String imagePath;
+	
 	
 	public Animal() {
 		this.typeid = 0;
@@ -18,14 +25,42 @@ public class Animal {
 		this.evasion = 10;
 	}
 	
-	public Animal(int hp,int power, int armor, int evasion) {
-	public Animal(String name, int hp,int power, int armor, int evasion) {
+	public String getImagePath() {
+		return this.imagePath;
+	}
+	
+	public int getPropertyType() {
+		return propertyType;
+	}
+
+	public void setPropertyType(int propertyType) {
+		this.propertyType = propertyType;
+	}
+
+	public int getMaxHp() {
+		return maxHp;
+	}
+
+	public void setMaxHp(int maxHp) {
+		this.maxHp = maxHp;
+	}
+
+	public int getActionType() {
+		return actionType;
+	}
+
+	public void setActionType(int actionType) {
+		this.actionType = actionType;
+	}
+
+	public Animal(int propertyType, int hp,int power, int armor, int evasion) {
+		this.propertyType = propertyType;
 		this.hp = hp;
 		this.power = power;
 		this.armor = armor;
 		this.evasion = evasion;
 	}
-	
+
 	public int gettypeid() {
 		return typeid;
 	}
@@ -33,7 +68,7 @@ public class Animal {
 	public void settypeid(int typeid) {
 		this.typeid = typeid;
 	}
-	
+
 	public int getHp() {
 		return hp;
 	}
@@ -68,7 +103,3 @@ public class Animal {
 	
 
 }
-
-
-
-

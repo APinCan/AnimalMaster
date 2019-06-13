@@ -15,7 +15,7 @@ public class main {
 		
 	
 		DAO dao = new DAO();
-		dao.save(user);
+		dao.save(user, 0);
 		Map<Integer, String> list = dao.printList();
 		System.out.println(list.keySet());
 		dao.load(1);

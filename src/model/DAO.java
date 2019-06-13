@@ -34,8 +34,8 @@ public class DAO {
 	}
 	
 	public void create() {
-		String query = "CREATE TABLE user(" + 
-				"userid INT NOT NULL AUTO_INCREMENT," + 
+		String query = "CREATE TABLES IF NOT EXISTS user(" + 
+				"userid INT NOT NULL," + 
 				"npc1 INT NOT NULL," + 
 				"npc2 INT NOT NULL," + 
 				"npc3 INT NOT NULL," + 
@@ -50,14 +50,14 @@ public class DAO {
 			e.printStackTrace();
 		}
 		
-		query = "CREATE TABLE animal("+
-				"userid INT NOT NULL,"+
-				"typeid INT NOT NULL,"+
-				"animalid INT NOT NULL AUTO_INCREMENT,"+
-				"hp INT NOT NULL,"+
-				"power INT NOT NULL,"+
-				"armor INT NOT NULL,"+
-				"evasion INT NOT NULL,"+
+		query = "CREATE TABLES IF NOT EXISTS animal("+
+				"userid INT,"+
+				"typeid INT,"+
+				"animalid INT AUTO_INCREMENT,"+
+				"hp INT,"+
+				"power INT,"+
+				"armor INT,"+
+				"evasion INT,"+
 				"PRIMARY KEY (animalid),"+
 				"INDEX userid_idx(userid ASC) VISIBLE,"+
 				"CONSTRAINT userid FOREIGN KEY(userid) REFERENCES user(userid) ON DELETE NO ACTION ON UPDATE NO ACTION);";
@@ -70,23 +70,39 @@ public class DAO {
 				
 	}
 	
-	public void save(User user) throws SQLException {
+	public void save(User user, int buttonIndex) throws SQLException {
 		
 		java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 		
-		String query = "insert into user (npc1,npc2,npc3,npc4,npc5,date) values (?,?,?,?,?,?)";
+		//save를 슬롯 2개에서만 할 것이므로 userid1,2인 row만 미리 insert 해놓음
+		String query = "insert into user (userid) values (?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, 1);
+			pstmt.executeUpdate();
+			pstmt.setInt(1, 2);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	
+		query = "UPDATE user SET (npc1,npc2,npc3,npc4,npc5,date) values (?,?,?,?,?,?) WHERE userid=?";
+			
+		//String query = "insert into user (npc1,npc2,npc3,npc4,npc5,date) values (?,?,?,?,?,?)";
 		int win[] = user.getWin();
+		if(buttonIndex == 1) {
 			pstmt = conn.prepareStatement(query);
 			for(int i=0;i<5;i++) {
 				pstmt.setInt(i+1, win[i]);
 			}
 			pstmt.setTimestamp(6, date);
-			pstmt.executeUpdate();
-			
-		int userid = getUserId();
-		System.out.println("userid : "+userid);
-		query = "insert into animal (userid,typeid,hp,power,armor,evasion) values (?,?,?,?,?,?)";
+			pstmt.setInt(7, buttonIndex);
+		}
 		
+		removeAnimal(buttonIndex);
+		//새로 동물 정보를 업데이트 하기 위해 이전의 동물 정보들 삭제 
+		
+		query = "insert into animal (userid,typeid,hp,power,armor,evasion) values (?,?,?,?,?,?)";		
 		ArrayList<Animal> animalArr = user.getCage();		
 		int size = animalArr.size();
 		int i=0;
@@ -94,7 +110,7 @@ public class DAO {
 		try {
 			Animal a = animalArr.get(i);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, userid);
+			pstmt.setInt(1, buttonIndex);
 			pstmt.setInt(2, a.gettypeid());
 			pstmt.setInt(3, a.getHp());
 			pstmt.setInt(4, a.getPower());
@@ -111,6 +127,22 @@ public class DAO {
 		
 	}
 	
+	public void removeAnimal(int buttonIndex) {
+		//buttonIndex에 해당하는 userid의 동물 정보들을 삭제 
+		String query = "DELETE FROM animal WHERE userid = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, buttonIndex);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("이전의 동물 정보가 삭제되지 않았습니다.");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/*
 	public int getUserId() {
 		int value=0;
 		//가장 마지막에 집어넣은 userid 가져오기 
@@ -127,7 +159,7 @@ public class DAO {
 		return value;
 	}
 	
-	
+	*/
 	public User load(int index) throws SQLException {
 		//세이브 파일 목록에서 번호 선택하면 그 번호 파일정보 로드
 		User user = new User();
@@ -145,7 +177,6 @@ public class DAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		
 		query = "SELECT * FROM animal where userid=?";
 		
@@ -177,13 +208,35 @@ public class DAO {
 	public Animal returnAnimal(int typeid) {
 		//typeid에 맞는 동물들을 생성해 리턴
 		switch (typeid) {
-		case 0:
-			Animal ani = new Animal();
-			return ani;
 		case 1:
-			Mouse mou = new Mouse();
-			return mou;
+			Shark sh = new Shark();
+			return sh;
+		case 2:
+			Deer de = new Deer();
+			return de;
+		case 3:
+			Jellyfish jell = new Jellyfish();
+			return jell;
+		case 4:
+			Lion lion = new Lion();
+			return lion;
+		case 5:
+			Wolf wolf = new Wolf();
+			return wolf;
+		case 6:
+			Fox fox = new Fox();
+			return fox;
+		case 7:
+			Bear bear = new Bear();
+			return bear;
+		case 8:
+			Dog dog = new Dog();
+			return dog;
+		case 9:
+			Mouse mouse = new Mouse();
+			return mouse;			
 		}
+		
 		return null;
 	}
 	

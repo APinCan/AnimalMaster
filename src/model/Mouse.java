@@ -4,11 +4,9 @@ public class Mouse extends Animal{
 	
 	
 	public Mouse() {
-		super();
-		settypeid(1);
+		//Áã : Ç®¼Ó¼º
+		super(2,15,10,10,40);		
+		this.imagePath = path+"/src/Image/mouse.gif";
 	}
-	
-	public Mouse(int hp,int power, int armor, int evasion) {
-		super(hp,power,armor,evasion);
-	}
+
 }
