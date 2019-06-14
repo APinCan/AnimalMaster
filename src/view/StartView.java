@@ -103,17 +103,13 @@ public class StartView extends JFrame{
 
 		//초기화면에 나타나는 Animal Master 타이틀 정의
 		String titleImagePath = path+"/src/Image/AnimalMaster.png";
-//		ImageIcon titleImage = new ImageIcon(titleImagePath);
-//		Image image = titleImage.getImage();
 		Image image = Toolkit.getDefaultToolkit().getImage(titleImagePath);
 		ImageIcon titleImage = new ImageIcon(image);
-		titleAnimalMaster = new JLabel("Animal Master!");
-		titleAnimalMaster.setFont(new Font("굴림", Font.PLAIN, 25));
-		titleAnimalMaster.setBounds(565, 149, 196, 61);
-//		titleAnimalMaster = new JLabel(titleImage);
-//		titleAnimalMaster.setLocation(565, 149);
-//		titleAnimalMaster.setSize(image.getWidth(null), image.getHeight(null));
-//		titleAnimalMaster.setOpaque(false);
+		titleAnimalMaster = new JLabel();
+		titleAnimalMaster.setIcon(titleImage);
+		titleAnimalMaster.setLocation(300, 150);
+		titleAnimalMaster.setSize(image.getWidth(null), image.getHeight(null));
+
 
 		buttonPanel.add(titleAnimalMaster);
 		

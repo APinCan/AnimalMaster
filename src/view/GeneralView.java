@@ -31,6 +31,7 @@ public class GeneralView extends JPanel implements View{
 	ImageIcon icon;
 	Clip clip;
 	StartView startView;
+	meetAnimalThread thread = new meetAnimalThread();
 	
 	//紐⑤��
 	User user;
@@ -259,18 +260,7 @@ public class GeneralView extends JPanel implements View{
 			this.viewX=640;
 			this.viewY=1280;
 			//���쇰���� ������������������������
-//			charLabel.setLocation(305,855);
 		}
-//		else if(mapName=="BattlePhase") {
-//			this.viewX=575;
-//			this.viewY=440;
-//			charLabel.setLocation(1000, 1000);
-//			npc1Label.setLocation(1000, 1000);
-//			npc2Label.setLocation(1000, 1000);
-//			npc3Label.setLocation(1000, 1000);
-//			npc4Label.setLocation(1000, 1000);
-//			bossLabel.setLocation(1000,1000);
-//		}
 		
 		playBackgroundMusic();
 		//嶺��얜������� ���쇰����占쎈�삣��占� ���щ��������
@@ -321,17 +311,20 @@ public class GeneralView extends JPanel implements View{
 //			clip.stop();
 			startView.moveNextMap("ForestView");
 			charLabel.setLocation(225, 100);
+			thread.start();
 //			playBackgroundMusic();
 		}
 		//������������
 		else if(currentLocationX==250 && currentLocationY==280) {
 			startView.moveNextMap("BeachView");
 			charLabel.setLocation(180, 60);
+			thread.start();
 		}
 		//���щ��占쎈�꿰������
 		else if(currentLocationX >= 600 && currentLocationY == 120) {
 			startView.moveNextMap("DesertView");
 			charLabel.setLocation(180, 265);
+			thread.start();
 		}
 		//������������
 		else if(currentLocationX == 250 && currentLocationY==0) {
@@ -370,13 +363,6 @@ public class GeneralView extends JPanel implements View{
 				charLabel.setLocation(590, 120);
 			}
 		}
-//		else if(mapName=="BossPhase") {
-//			//���щ�������� ����梨뜹����������占썲�����������������▼��占� �띠���������� 占쎄���������������������占�
-//			if((locationX>=285 && locationX<=340) && locationY==860) {
-//				startView.moveNextMap("TrainingCityView");
-//				charLabel.setLocation(250, 10);
-//			}
-//		}
 	}
 	
 	public void backToBossPhase() {
