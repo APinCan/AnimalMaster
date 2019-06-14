@@ -225,6 +225,13 @@ public class StartView extends JFrame{
 
 		setLocationRelativeTo(null);
 	}
+	public void backToBossPhase(String nextMap) {
+		generalView.backToBossPhase();
+		generalView.setMap(nextMap);
+		setContentPane(generalView);
+		setSize(generalView.getBackgroundImageX(), generalView.getBackgroundImageY());
+		generalView.requestFocus();
+	}
 	
 	public void moveBattlePhase(User user, Animal animal) {
 		battlePhase.setMapCharacter(user, animal);
