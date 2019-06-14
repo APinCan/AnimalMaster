@@ -114,7 +114,8 @@ public class BattlePhase extends JPanel implements View {
 				System.out.println("change");
 			}
 			else if(ticLabel.getX()==415) {
-				//startView.backToBossPhase("BossPhase");
+				clip.close();
+				startView.moveNextMap("BossPhase");
 			}
 		}
 	};
@@ -241,9 +242,6 @@ public class BattlePhase extends JPanel implements View {
 		startView.moveBattlePhase(user, hunter);
 	}
 	
-	
-	
-	
 	public void setMapCharacter(User user, Animal animal) {
 		this.setMap("BattlePhase");
 		//가져온 애니멀이 어떤동물인가 알아보기
@@ -253,6 +251,9 @@ public class BattlePhase extends JPanel implements View {
 		this.setMap("BattlePhase");
 	}
 	
+	public void setStartView(StartView startView) {
+		this.startView=startView;
+	}
 	
 	public void setYourAnimal(Animal animal) {
 		//애니멀이 무엇인가?

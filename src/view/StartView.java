@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -35,7 +36,7 @@ import java.awt.Font;
 public class StartView extends JFrame{
 	private JPanel contentPane;
 	JPanel buttonPanel = new JPanel();
-	JLabel titleAnimalMaster = new JLabel("Animal Master");
+	JLabel titleAnimalMaster;
 	JButton btnStartGame = new JButton("START");
 	JButton btnLoadGame = new JButton("LOAD");
 	JPanel characterPanel;
@@ -72,6 +73,7 @@ public class StartView extends JFrame{
 
 	public StartView() {
 		generalView.setStartView(this);
+		battlePhase.setStartView(this);
 		
 		path=System.getProperty("user.dir");
 		String imagePath=path+"/src/Image/background.jpg";
@@ -100,8 +102,19 @@ public class StartView extends JFrame{
 		contentPane.add(buttonPanel);
 
 		//초기화면에 나타나는 Animal Master 타이틀 정의
+		String titleImagePath = path+"/src/Image/AnimalMaster.png";
+//		ImageIcon titleImage = new ImageIcon(titleImagePath);
+//		Image image = titleImage.getImage();
+		Image image = Toolkit.getDefaultToolkit().getImage(titleImagePath);
+		ImageIcon titleImage = new ImageIcon(image);
+		titleAnimalMaster = new JLabel("Animal Master!");
 		titleAnimalMaster.setFont(new Font("굴림", Font.PLAIN, 25));
 		titleAnimalMaster.setBounds(565, 149, 196, 61);
+//		titleAnimalMaster = new JLabel(titleImage);
+//		titleAnimalMaster.setLocation(565, 149);
+//		titleAnimalMaster.setSize(image.getWidth(null), image.getHeight(null));
+//		titleAnimalMaster.setOpaque(false);
+
 		buttonPanel.add(titleAnimalMaster);
 		
 		//gameStart버튼 정의
@@ -225,13 +238,13 @@ public class StartView extends JFrame{
 
 		setLocationRelativeTo(null);
 	}
-	public void backToBossPhase(String nextMap) {
-		generalView.backToBossPhase();
-		generalView.setMap(nextMap);
-		setContentPane(generalView);
-		setSize(generalView.getBackgroundImageX(), generalView.getBackgroundImageY());
-		generalView.requestFocus();
-	}
+//	public void backToBossPhase(String nextMap) {
+//		generalView.backToBossPhase();
+//		generalView.setMap(nextMap);
+//		setContentPane(generalView);
+//		setSize(generalView.getBackgroundImageX(), generalView.getBackgroundImageY());
+//		generalView.requestFocus();
+//	}
 	
 	public void moveBattlePhase(User user, Animal animal) {
 		battlePhase.setMapCharacter(user, animal);
