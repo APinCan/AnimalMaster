@@ -258,7 +258,7 @@ public class GeneralView extends JPanel implements View{
 		}
 		else if(mapName=="BossPhase") {
 			this.viewX=640;
-			this.viewY=1280;
+			this.viewY=970;
 			//占쏙옙占쎌�곤옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
 		}
 		
