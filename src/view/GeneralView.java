@@ -34,11 +34,11 @@ public class GeneralView extends JPanel implements View{
 	StartView startView;
 	meetAnimalThread thread = new meetAnimalThread();
 	
-	//筌��ㅿ옙占�
+	//嶺�占쏙옙�우����占�
 	User user;
 	Hunter hunter;
 	
-	//嶺�占썹��占쏙옙占썲�����꿨����占쏙옙����占쏙옙�몄������占쏙옙
+	//癲ワ옙���뱄옙占썲���������뀐옙占쏙옙占쏙옙轅⑨옙占쏙옙占썲������占쏙옙占쏙옙������占쎈�占쏙옙占쏙옙占쏙옙������
 	ImageIcon characterImageIcon;
 	ImageIcon npc1ImageIcon;
 	ImageIcon npc2ImageIcon;
@@ -68,7 +68,7 @@ public class GeneralView extends JPanel implements View{
 	JLabel bossLabel;
 	
 	/*
-	占썬�삳�ワ옙占� 占쎈��源쏙옙占� binding
+	���э옙�놂옙������占� ����占쏙옙繹�������占� binding
 	 */
 	private static final String LEFT="Left";
 	private static final String RIGHT="Right";
@@ -131,7 +131,7 @@ public class GeneralView extends JPanel implements View{
 	};
 	
 	/*
-	 * ����占쏙옙占썩�ο옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占썲��占�
+	 * 占쏙옙占쏙옙���������⑼옙恝�����������������������������������뀐옙占썲��占�
 	 */
 	public GeneralView() {
 		this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), LEFT);
@@ -145,8 +145,8 @@ public class GeneralView extends JPanel implements View{
 		
 		this.setLayout(null);
 		
-		//癲ワ옙���뀐옙占쏙옙諛몃�⑨옙占쏙옙占쏙옙占쏙옙占썲��占� ����占쏙옙占쏙옙��占쏙옙占썲��占�
-		charPath=path+"/src/Image/Hunter.jpg";
+		//�꿔����占쏙옙占쎈����������獄�紐�占썩�⑥�����������������������뀐옙占썲��占� 占쏙옙占쏙옙������������占쏙옙���������뀐옙占썲��占�
+		charPath=path+"/src/Image/hunter.gif";
 		characterImageIcon=new ImageIcon(charPath);
 		charImage=characterImageIcon.getImage();
 		
@@ -193,7 +193,7 @@ public class GeneralView extends JPanel implements View{
 		try {
 			clip.close();
 		} catch(NullPointerException e) {
-			System.out.println("占쏙옙占싼�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 bgm占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙甕곤옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙");
+			System.out.println("���������쇽옙������������������������������������������ bgm������������������ ��������������������������������怨ㅼ��������������������������������������");
 		}
 
 		String musicName="";
@@ -212,7 +212,7 @@ public class GeneralView extends JPanel implements View{
 			musicName="TrainingCityWAV.wav";
 			break;
 		case "BossPhase":
-			//占쏙옙占쎌�곤옙占쏙옙占쏙옙占쏙옙占쏙옙占� ����占썩�쇽옙占쏙옙紐�糾占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙��占�
+			//����������占쎄낀����������������������������占� 占쏙옙占쏙옙���⑼옙�쎌��������筌�占썹낼������������������������������������������占쏙옙��占�
 			break;
 //		case "BattlePhase":
 //			musicName="BattlePhaseDOSWAV.wav";
@@ -263,11 +263,11 @@ public class GeneralView extends JPanel implements View{
 		else if(mapName=="BossPhase") {
 			this.viewX=640;
 			this.viewY=970;
-			//占쏙옙占쎌�곤옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+			//����������占쎄낀����������占� ������������������������������������������������������������������������
 		}
 		
 		playBackgroundMusic();
-		//癲ワ옙占쎌��占쏙옙占쏙옙占쏙옙占� 占쏙옙占쎌�곤옙占쏙옙占썲����占쎌�ｏ옙占썲��占� 占쏙옙占싼�占쏙옙占쏙옙占쏙옙占쏙옙
+		//�꿔��������占쏙옙��������������������占� ����������占쎄낀�����������뀐옙占쏙옙占썲����占쏙������뀐옙占썲��占� ���������쇽옙������������������������
 //		setSize(this.viewX, this.viewY);
 	}
 	
@@ -275,7 +275,7 @@ public class GeneralView extends JPanel implements View{
 		this.startView=startView;
 	}
 	
-	//癲ワ옙占쎌��占쏙옙占쏙옙占쏙옙占� boundary������占쏙옙��占� 占쏙옙占싼�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙獄�占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙��占� 癲ワ옙��占썸�占쏙옙占쏙옙占쏙옙占쏙옙��占쏙옙占쏙옙占쏙옙�울옙占쏙옙 占쏙옙占쏙옙占쏙옙
+	//�꿔��������占쏙옙��������������������占� boundary占쏙옙占쏙옙占쏙옙������占쏙옙��占� ���������쇽옙������������������������������������������ ��������占썲��������占� ������������������������������������������占쏙옙��占� �꿔����占쏙옙���몌옙������������������������占쏙옙������������������占쎌�몄�������� ������������������
 	private void limitBoundary(int x, int y) {
 		if(x<0) {
 			charLabel.setLocation(0, y);
@@ -310,7 +310,7 @@ public class GeneralView extends JPanel implements View{
 		int currentLocationX = charLabel.getX();
 		int currentLocationY = charLabel.getY();
 		
-		//占쏙옙占쏙옙占쏙옙����援�
+		//������������������占쏙옙占쏙옙�댐옙
 		if(currentLocationX==0 && currentLocationY==120) {
 //			clip.stop();
 			startView.moveNextMap("ForestView");
@@ -318,21 +318,21 @@ public class GeneralView extends JPanel implements View{
 			thread.start();
 //			playBackgroundMusic();
 		}
-		//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+		//������������������������������������
 		else if(currentLocationX==250 && currentLocationY==280) {
 			startView.moveNextMap("BeachView");
 			charLabel.setLocation(180, 60);
 			thread.start();
 		}
-		//占쏙옙占싼�占쏙옙����占쎄염占쏙옙占쏙옙占쏙옙
+		//���������쇽옙������占쏙옙占쏙옙�����쇔������������������
 		else if(currentLocationX >= 600 && currentLocationY == 120) {
 			startView.moveNextMap("DesertView");
 			charLabel.setLocation(180, 265);
 			thread.start();
 		}
-		//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+		//������������������������������������
 		else if(currentLocationX == 250 && currentLocationY==0) {
-			//占쎄���占쎌�ｏ옙占쏙옙�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙��占�
+			//����占쏙옙占썲����占쏙���������占썲������������������������������������������������占쏙옙��占�
 			startView.moveNextMap("BossPhase");
 			charLabel.setLocation(305,855);
 			setNPCHunter();
@@ -344,7 +344,7 @@ public class GeneralView extends JPanel implements View{
 		int locationY=charLabel.getY();
 		
 		if(mapName=="ForestView") {
-			//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쎌�깍옙占쏙옙��占쏙옙占쏙옙 x=225, y=0占쏙옙占쏙옙���뀐옙占쏙옙占쏙옙占썲����占쏙옙 癲ワ옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占싸뀐옙��占쏙옙
+			//������������������������������������ ����������������������������占쎄���������占쏙옙������������ x=225, y=0������������占쏙옙占쎈�������������������뀐옙占쏙옙占썲������ �꿔�������������������������������������몃����占쏙옙������
 			if(locationX == 225 && locationY==0) {
 //				clip.stop();
 				startView.moveNextMap("TrainingCityView");
@@ -358,10 +358,10 @@ public class GeneralView extends JPanel implements View{
 				charLabel.setLocation(250, 270);
 				
 			}
-			//x>=130 && x<= 550 ,y=占쏙옙占쏙옙���뀐옙占쏙옙占쏙옙占썲����占쏙옙 癲ワ옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占싸뀐옙��占쏙옙
+			//x>=130 && x<= 550 ,y=������������占쏙옙占쎈�������������������뀐옙占쏙옙占썲������ �꿔�������������������������������������몃����占쏙옙������
 		}
 		else if(mapName=="DesertView") {
-			//x=65 && x<=85 y>=390 && y<=410 占쏙옙占쏙옙占쏙옙����占쏙옙 癲ワ옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占싸뀐옙��占쏙옙
+			//x=65 && x<=85 y>=390 && y<=410 ������������������占쏙옙占쏙옙������ �꿔�������������������������������������몃����占쏙옙������
 			if((locationX>=65 && locationX<=85) && (locationY>=390 && locationY<=410)) {
 				startView.moveNextMap("TrainingCityView");
 				charLabel.setLocation(590, 120);
@@ -376,21 +376,21 @@ public class GeneralView extends JPanel implements View{
 			if(currentLocationX==285 && currentLocationY==750) {
 				charLabel.setLocation(285,745);
 			}
-			//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+			//������������������������������������
 			else if(currentLocationX==365 && currentLocationY==460) {
 				charLabel.setLocation(360,460);
 			}
-			//占쏙옙占싼�占쏙옙����占쎄염占쏙옙占쏙옙占쏙옙
+			//���������쇽옙������占쏙옙占쏙옙�����쇔������������������
 			else if(currentLocationX ==410 && currentLocationY == 400) {
 				charLabel.setLocation(405,400);
 			}
-			//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+			//������������������������������������
 			else if(currentLocationX == 285 && currentLocationY==260) {
-				//占쎄���占쎌�ｏ옙占쏙옙�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙��占�
+				//����占쏙옙占썲����占쏙���������占썲������������������������������������������������占쏙옙��占�
 				charLabel.setLocation(285,255);
 			}	
 			else if(currentLocationX == 285 && currentLocationY==120) {
-				//占쎄���占쎌�ｏ옙占쏙옙�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙��占�
+				//����占쏙옙占썲����占쏙���������占썲������������������������������������������������占쏙옙��占�
 				charLabel.setLocation(285,115);
 			}	
 		}
@@ -403,21 +403,21 @@ public class GeneralView extends JPanel implements View{
 			if(currentLocationX==285 && currentLocationY==750) {
 				startView.moveBattlePhase(hunter);
 			}
-			//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+			//������������������������������������
 			else if(currentLocationX==365 && currentLocationY==460) {
 				startView.moveBattlePhase(hunter);
 			}
-			//占쏙옙占싼�占쏙옙����占쎄염占쏙옙占쏙옙占쏙옙
+			//���������쇽옙������占쏙옙占쏙옙�����쇔������������������
 			else if(currentLocationX ==410 && currentLocationY == 400) {
 				startView.moveBattlePhase(hunter);
 			}
-			//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+			//������������������������������������
 			else if(currentLocationX == 285 && currentLocationY==260) {
-				//占쎄���占쎌�ｏ옙占쏙옙�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙��占�
+				//����占쏙옙占썲����占쏙���������占썲������������������������������������������������占쏙옙��占�
 				startView.moveBattlePhase(hunter);
 			}	
 			else if(currentLocationX == 285 && currentLocationY==120) {
-				//占쎄���占쎌�ｏ옙占쏙옙�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙��占�
+				//����占쏙옙占썲����占쏙���������占썲������������������������������������������������占쏙옙��占�
 				startView.moveBattlePhase(hunter);
 			}	
 			else if((currentLocationX>=285 && currentLocationX<=340) && currentLocationY==860){
@@ -489,7 +489,7 @@ public class GeneralView extends JPanel implements View{
 		bossLabel.setVisible(true);
 	}
 	
-	//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙癲ワ옙嚥〓�뱄옙占� 癲ワ옙占쏙옙占쏙옙占쏙옙占쎌�곤옙��占쏙옙占쏙옙占쏙옙壤���占쏙옙��占� 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙筌�猷�占쏙옙占쏙옙占쏙옙 -> 癲ワ옙占쏙옙占쏙옙 占쏙옙占쏙옙筌�猷�占쏙옙占싼�占쏙옙占쏙옙占쏙옙占쎌�ｏ옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占썩�쇽옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� 占쏙옙占싼�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙����占쏙옙占쏙옙濚�占썸��占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+	//�������������������������������������꿔�����γ��占쎈�����占� �꿔��������������������������占쎄낀��占쏙옙������������������鶯ㅿ옙占쏙옙������占쏙옙��占� ������������������������������嶺�占썹�뤄옙������������������ -> �꿔���������������� ������������嶺�占썹�뤄옙���������쇽옙����������������������占쏙�����������������占� ������������������������������������ ���������������⑼옙�쎌����������������������������������占� ���������쇽옙������������������������������������������占쏙옙占쏙옙������������嚥�占썲���몌옙占썲������������������������������������������
 	private class meetAnimalThread extends Thread{
 		Controler con = Controler.getInstance();
 		public void run() {
@@ -500,12 +500,12 @@ public class GeneralView extends JPanel implements View{
 					break;
 				}
 				try {
-					Thread.sleep(1000); //1����竊�占쏙옙��占� 占쏙옙占쏙옙占쏙옙占썬�ワ옙占쏙옙占�
+					Thread.sleep(1000); //1占쏙옙占쏙옙塋�占썲������占쏙옙��占� ���������������������э옙������������占�
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			// 占쏙옙占쎌�곤옙占쏙옙占쏙옙占쏙옙占쏙옙占� 癲ワ옙占쎌��占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� popAnimal 占쏙옙占쏙옙占쏙옙 癲ワ옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙癲ワ옙嚥〓�뱄옙占�
+			// ����������占쎄낀����������������������������占� �꿔��������占쏙옙��������������������������������������占� popAnimal ������������������ �꿔���������������������������������� �������������������������������������꿔�����γ��占쎈�����占�
 			clip.close();
 			startView.moveBattlePhase(popAnimal);
 		}
