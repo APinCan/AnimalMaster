@@ -10,7 +10,7 @@ public class User extends Hunter {
 	}
 	
 	public void setWin(int id, int win) {
-		this.win[id] = win; //hunter[id]¿¡°Ô ÀÌ°åÀ» ½Ã 1¼³Á¤ 
+		this.win[id] = win; //hunter[id]쩔징째횚 �횑째책�쨩 쩍횄 1쩌쨀횁짚 
 	}
 	
 
@@ -18,7 +18,8 @@ public class User extends Hunter {
 		return this.win;
 	}
 	
-	
-	
+	public void addCage(Animal animal) {
+		this.cage.add(animal);
+	}
 }
 

@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Hunter {
 	
-	public int id; //npc_hunter들의 숫자
+	public int id; //npc_hunter�뱾�쓽 �닽�옄
 	public ArrayList<Animal> cage;
 	private Animal attacker;
 	
@@ -17,15 +17,13 @@ public class Hunter {
 	public void setAttacker(int index) {
 
 		this.attacker = this.cage.get(index);
-		//현재 공격하는 주자 설정
+		//�쁽�옱 怨듦꺽�븯�뒗 二쇱옄 �꽕�젙
 	}
 	
 	public ArrayList<Animal> getCage(){
 		return this.cage;
 
 	}
-	
-	
 
 }
 

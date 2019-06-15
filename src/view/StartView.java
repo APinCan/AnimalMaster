@@ -17,7 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import model.Animal;
+import model.Bear;
+import model.Deer;
+import model.Fox;
 import model.Hunter;
+import model.Mouse;
 import model.User;
 
 import javax.swing.JButton;
@@ -48,6 +52,9 @@ public class StartView extends JFrame{
 	GeneralView generalView = new GeneralView();
 	GameSaveView gamesaveView;
 	BattlePhase battlePhase = new BattlePhase();
+	
+	//유저
+	User user = new User();
 
 	/**
 	 * Launch the application.
@@ -70,10 +77,24 @@ public class StartView extends JFrame{
 		};
 		setTitle("Animal Mater!");
 	}
+	
+//	private void userInit() {
+//		user = new User();
+//		
+//		Mouse mouse = new Mouse();
+//		Bear bear = new Bear();
+//		Deer deer = new Deer();
+//		user.addCage(mouse);
+//		user.addCage(deer);
+//		user.addCage(bear);
+//		
+//		System.out.println("Log : UserCage: "+user.getCage().size());
+//	}
 
 	public StartView() {
 		generalView.setStartView(this);
 		battlePhase.setStartView(this);
+//		userInit();
 		
 		path=System.getProperty("user.dir");
 		String imagePath=path+"/src/Image/background.jpg";
@@ -242,8 +263,12 @@ public class StartView extends JFrame{
 //		generalView.requestFocus();
 //	}
 	
-	public void moveBattlePhase(User user, Animal animal) {
-		battlePhase.setMapCharacter(user, animal);
+	public void moveBattlePhase(Animal animal) {
+		//이전맵에 대한 정보를 기억
+		System.out.println(""+user.getCage().size());
+		
+		String currentMap = generalView.getCurrentMap();
+		battlePhase.setMapCharacter(user, animal, currentMap);
 		setContentPane(battlePhase);
 		setSize(battlePhase.getBackgroundImageX(), battlePhase.getBackgroundImageY());
 		battlePhase.requestFocus();
@@ -251,7 +276,7 @@ public class StartView extends JFrame{
 		setLocationRelativeTo(null);
 	}
 	
-	public void moveBattlePhase(User user, Hunter hunter) {
+	public void moveBattlePhase(Hunter hunter) {
 		battlePhase.setMapCharacter(user, hunter);
 		setContentPane(battlePhase);
 		setSize(battlePhase.getBackgroundImageX(), battlePhase.getBackgroundImageY());

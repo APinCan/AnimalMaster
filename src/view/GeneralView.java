@@ -28,6 +28,7 @@ public class GeneralView extends JPanel implements View{
 	private int viewX=0;
 	private int viewY=0;
 	private String mapName;
+	int currentMapInteger;
 	ImageIcon icon;
 	Clip clip;
 	StartView startView;
@@ -239,16 +240,19 @@ public class GeneralView extends JPanel implements View{
 		if(mapName=="ForestView") {
 			this.viewX=785;
 			this.viewY=770;
+			currentMapInteger=2;
 //			charLabel.setLocation(225, 100);
 		}
 		else if(mapName=="DesertView"){
 			this.viewX=755;
 			this.viewY=565;
+			currentMapInteger=1;
 //			charLabel.setLocation(180, 265);
 		}
 		else if(mapName=="BeachView") {
 			this.viewX=655;
 			this.viewY=975;
+			currentMapInteger=0;
 //			charLabel.setLocation(180, 60);
 		}
 		else if(mapName=="TrainingCityView") {
@@ -397,24 +401,24 @@ public class GeneralView extends JPanel implements View{
 		int currentLocationY = charLabel.getY();
 		if(mapName=="BossPhase") {
 			if(currentLocationX==285 && currentLocationY==750) {
-				startView.moveBattlePhase(user, hunter);
+				startView.moveBattlePhase(hunter);
 			}
 			//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
 			else if(currentLocationX==365 && currentLocationY==460) {
-				startView.moveBattlePhase(user, hunter);
+				startView.moveBattlePhase(hunter);
 			}
 			//占쏙옙占싼�占쏙옙����占쎄염占쏙옙占쏙옙占쏙옙
 			else if(currentLocationX ==410 && currentLocationY == 400) {
-				startView.moveBattlePhase(user, hunter);
+				startView.moveBattlePhase(hunter);
 			}
 			//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
 			else if(currentLocationX == 285 && currentLocationY==260) {
 				//占쎄���占쎌�ｏ옙占쏙옙�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙��占�
-				startView.moveBattlePhase(user, hunter);
+				startView.moveBattlePhase(hunter);
 			}	
 			else if(currentLocationX == 285 && currentLocationY==120) {
 				//占쎄���占쎌�ｏ옙占쏙옙�占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙��占�
-				startView.moveBattlePhase(user, hunter);
+				startView.moveBattlePhase(hunter);
 			}	
 			else if((currentLocationX>=285 && currentLocationX<=340) && currentLocationY==860){
 				startView.moveNextMap("TrainingCityView");
@@ -491,7 +495,7 @@ public class GeneralView extends JPanel implements View{
 		public void run() {
 			Animal popAnimal = null;
 			while(true) {
-				popAnimal = con.meetAnimal(2);
+				popAnimal = con.meetAnimal(currentMapInteger);
 				if(popAnimal != null) {
 					break;
 				}
@@ -502,7 +506,12 @@ public class GeneralView extends JPanel implements View{
 				}
 			}
 			// 占쏙옙占쎌�곤옙占쏙옙占쏙옙占쏙옙占쏙옙占� 癲ワ옙占쎌��占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占� popAnimal 占쏙옙占쏙옙占쏙옙 癲ワ옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙癲ワ옙嚥〓�뱄옙占�
-			startView.moveBattlePhase(user, popAnimal);
+			clip.close();
+			startView.moveBattlePhase(popAnimal);
 		}
+	}
+	
+	public String getCurrentMap() {
+		return this.mapName;
 	}
 }

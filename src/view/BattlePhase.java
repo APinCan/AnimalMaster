@@ -28,6 +28,8 @@ public class BattlePhase extends JPanel implements View {
 	
 	StartView startView;
 	GeneralView generalView;
+	//다른 맵에서 배틀페이즈를 띄웠는데 도망가기시에 보스페이즈로가는 문제 발생
+	String prevMap="";
 	
 	User user;
 	Hunter hunter;
@@ -56,9 +58,9 @@ public class BattlePhase extends JPanel implements View {
 	JLabel menu4Label;
 	JLabel ticLabel;
 	
-	//동물
-	ImageIcon myAnimalIcon;
-	JLabel yourAnimalLabel = new JLabel();
+	//배틀페이즈 user, enemy 레이블
+	JLabel userLabel = new JLabel();
+	JLabel yourLabel = new JLabel();
 	
 	public BattlePhase() {
 		setMenu();
@@ -115,11 +117,10 @@ public class BattlePhase extends JPanel implements View {
 			}
 			else if(ticLabel.getX()==415) {
 				clip.close();
-				startView.moveNextMap("BossPhase");
+				startView.moveNextMap(prevMap);
 			}
 		}
 	};
-
 	
 	private void limitBoundary(int x, int y) {
 		if(x<40) {
@@ -239,30 +240,56 @@ public class BattlePhase extends JPanel implements View {
 	}
 	
 	public void moveToBossPhase() {
-		startView.moveBattlePhase(user, hunter);
+		startView.moveBattlePhase(hunter);
 	}
 	
-	public void setMapCharacter(User user, Animal animal) {
+	public void setMapCharacter(User user, Animal animal, String prevMap) {
 		this.setMap("BattlePhase");
 		//가져온 애니멀이 어떤동물인가 알아보기
+		this.prevMap=prevMap;
+		
+		System.out.println("Log : prevMap : "+this.prevMap);
+		
+		setYourAnimal(animal);
+		setMyAnimal(user);
 	}
 	
 	public void setMapCharacter(User user, Hunter player) {
 		this.setMap("BattlePhase");
+		
+		this.prevMap="BossPhase";
 	}
 	
 	public void setStartView(StartView startView) {
 		this.startView=startView;
 	}
 	
-	public void setYourAnimal(Animal animal) {
+	private void setYourAnimal(Animal animal) {
+		System.out.println("Log : setYourAnimal");
 		//애니멀이 무엇인가?
-//		String animal = animal.name;
-//		String imagePath= path+"/src/Image/"+aniaml+".gif";
+		String animalImagePath=animal.getImagePath();
 		
-//		ImageIcon yourAnimalIcon = new ImageIcon(imagePath);
-//		yourAnimalLabel.setIcon(yourAnimalIcon);
-//		this.add(yourAnimalLabel);
-//		setLocation();
+		ImageIcon yourAnimalIcon = new ImageIcon(animalImagePath);
+		yourLabel.setIcon(yourAnimalIcon);
+		yourLabel.setLocation(150,20);
+		yourLabel.setSize(yourAnimalIcon.getIconWidth(), yourAnimalIcon.getIconHeight());
+		
+		this.add(yourLabel);
+		yourLabel.setVisible(true);
+	}
+	
+	private void setMyAnimal(User user) {
+		System.out.println("Log : setMyAnimal");
+	
+		Animal currentUserAnimal = user.getCage().get(0);
+		String animalImagePath = currentUserAnimal.getImagePath();
+		
+		ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
+		userLabel.setIcon(myAnimalIcon);
+		userLabel.setLocation(10,50);
+		userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
+		
+		this.add(userLabel);
+		userLabel.setVisible(true);
 	}
 }
