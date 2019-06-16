@@ -7,12 +7,49 @@ import model.*;
 
 public class Controler {
 	private Random ran;
-
+	private Hunter[] npc;
+	
 	private Controler() {
 		ran = new Random();
+		npc = new Hunter[5];
+		for (int i = 0; i < 5; i++) {
+			npc[i] = new Hunter();
+			npc[i].cage = new ArrayList<Animal>();
+			Animal ani = new Mouse();
+			ani.setMaxHp(ani.getHp() + i * 10);
+			ani.setHp(ani.getMaxHp());
+			ani.setArmor(ani.getArmor() + i * 10);
+			ani.setEvasion(ani.getEvasion() + i * 10);
+			ani.setPower(ani.getPower() + i * 10);
+			npc[i].cage.add(ani);
+			
+			ani = new Lion();
+			ani.setMaxHp(ani.getHp() + i * 10);
+			ani.setHp(ani.getMaxHp());
+			ani.setArmor(ani.getArmor() + i * 10);
+			ani.setEvasion(ani.getEvasion() + i * 10);
+			ani.setPower(ani.getPower() + i * 10);
+			npc[i].cage.add(ani);
+			
+			ani = new Shark();
+			ani.setMaxHp(ani.getHp() + i * 10);
+			ani.setHp(ani.getMaxHp());
+			ani.setArmor(ani.getArmor() + i * 10);
+			ani.setEvasion(ani.getEvasion() + i * 10);
+			ani.setPower(ani.getPower() + i * 10);
+			npc[i].cage.add(ani);
+			
+			ani = new Bear();
+			ani.setMaxHp(ani.getHp() + i * 10);
+			ani.setHp(ani.getMaxHp());
+			ani.setArmor(ani.getArmor() + i * 10);
+			ani.setEvasion(ani.getEvasion() + i * 10);
+			ani.setPower(ani.getPower() + i * 10);
+			npc[i].cage.add(ani);
+		}
 	}
 
-	private static class Singleton { // ½Ì±ÛÅæÀ» À§ÇÑ Å¬·¡½º
+	private static class Singleton { // ì‹±ê¸€í†¤ì„ ìœ„í•œ í´ëž˜ìŠ¤
 		public static final Controler INSTANCE = new Controler();
 	}
 
@@ -20,7 +57,7 @@ public class Controler {
 		return Singleton.INSTANCE;
 	}
 
-	// ¼öÁ¤¿Ï·á
+	// ìˆ˜ì •ì™„ë£Œ
 	private Animal randAnimal(int map) {
 		Animal ani;
 		int per = ran.nextInt(10);
@@ -56,14 +93,14 @@ public class Controler {
 		return ani;
 	}
 
-	// map => 0 : ÇØº¯, 1 : »ç¸·, 2 : ½£
+	// map => 0 : í•´ë³€, 1 : ì‚¬ë§‰, 2 : ìˆ²
 	public Animal meetAnimal(int map) {
 		if (ran.nextInt(10) < 3)
 			return randAnimal(map);
 		return null;
 	}
 
-	// ¼öÁ¤¿Ï·á
+	// ìˆ˜ì •ì™„ë£Œ
 	public void calcHP(Animal ani1, Animal ani2) {
 		int t1 = ani1.getPropertyType(), t2 = ani2.getPropertyType();
 		double adv1, adv2;
@@ -106,7 +143,7 @@ public class Controler {
 		}
 	}
 
-	// ¼öÁ¤¿Ï·á
+	// ìˆ˜ì •ì™„ë£Œ
 	public boolean catchAnimal(Animal ani) {
 		int hp = ani.getHp();
 		int per;
@@ -124,7 +161,7 @@ public class Controler {
 		return false;
 	}
 
-	// ¼öÁ¤ ¿Ï·á
+	// ìˆ˜ì • ì™„ë£Œ
 	public void winBattle(Animal winner, Animal loser) {
 		double plusPower = 0.05 * loser.getPower();
 		double plusMaxHp = 0.05 * loser.getHp();
@@ -144,7 +181,7 @@ public class Controler {
 		loser.setHp(loser.getHp());
 	}
 
-	// view ¿¡¼­ ¾î¶²½ÄÀ¸·Î save, load ÇÒÁö È®ÀÎ ÈÄ ¼öÁ¤¿¹Á¤
+	// view ì—ì„œ ì–´ë–¤ì‹ìœ¼ë¡œ save, load í• ì§€ í™•ì¸ í›„ ìˆ˜ì •ì˜ˆì •
 	public void saveGame(User user, int saveNum) throws SQLException {
 		DAO db = new DAO();
 		db.save(user, saveNum);
@@ -154,5 +191,8 @@ public class Controler {
 		DAO db = new DAO();
 		User user = db.load(loadNum);
 		return user;
+	}
+	public Hunter getNPC(int npcNum) {
+		return npc[npcNum];
 	}
 }
