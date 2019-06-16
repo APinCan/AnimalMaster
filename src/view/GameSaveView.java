@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -140,15 +142,24 @@ public class GameSaveView extends JFrame {
 	
 	//game save
 	private void btnSaveCurrentInfo(ActionEvent e) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date time = new Date();
+		
+		String currentTime = dateFormat.format(time);
+		String printTime = "Time : "+currentTime;
+		
 		//save1
 		if(e.getSource().equals(button_1)) {
 			//current information save
+
+			label_1.setText(printTime);
 			
 			this.dispose();
 		}
 		//save2
 		else {
 			//current information save
+			label_2.setText(printTime);
 			
 			this.dispose();
 		}
