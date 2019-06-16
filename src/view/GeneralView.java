@@ -206,7 +206,7 @@ public class GeneralView extends JPanel implements View{
 		try {
 			clip.close();
 		} catch(NullPointerException e) {
-			System.out.println("ÇöÀç ¼³µÈµÈ À½¾ÇÀÌ ¾ø½À´Ï´Ù");
+			System.out.println("í˜„ìž¬ ì„¤ëœëœ ìŒì•…ì´ ì—†ìŠµë‹ˆë‹¤");
 		}
 
 		String musicName="";
@@ -315,17 +315,17 @@ public class GeneralView extends JPanel implements View{
 		if(currentLocationX==0 && currentLocationY==120) {
 			startView.moveNextMap("ForestView");
 			charLabel.setLocation(225, 100);
-			thread.start();
+			threadRun();
 		}
 		else if(currentLocationX==250 && currentLocationY==280) {
 			startView.moveNextMap("BeachView");
 			charLabel.setLocation(180, 60);
-			thread.start();
+			threadRun();
 		}
 		else if(currentLocationX >= 600 && currentLocationY == 120) {
 			startView.moveNextMap("DesertView");
 			charLabel.setLocation(180, 265);
-			thread.start();
+			threadRun();
 		}
 		else if(currentLocationX == 250 && currentLocationY==0) {
 			startView.moveNextMap("BossPhase");
@@ -491,5 +491,10 @@ public class GeneralView extends JPanel implements View{
 	
 	public String getCurrentMap() {
 		return this.mapName;
+	}
+	
+	public void threadRun(){
+		thread = new meetAnimalThread();
+		thread.start();
 	}
 }
