@@ -50,7 +50,7 @@ public class StartView extends JFrame{
 	Clip clip; //배경음악재생위해 필요
 	
 	GeneralView generalView = new GeneralView();
-	GameSaveView gamesaveView;
+	GameSaveView gamesaveView = new GameSaveView();
 	BattlePhase battlePhase = new BattlePhase();
 	
 	//유저
@@ -77,24 +77,11 @@ public class StartView extends JFrame{
 		};
 		setTitle("Animal Mater!");
 	}
-	
-//	private void userInit() {
-//		user = new User();
-//		
-//		Mouse mouse = new Mouse();
-//		Bear bear = new Bear();
-//		Deer deer = new Deer();
-//		user.addCage(mouse);
-//		user.addCage(deer);
-//		user.addCage(bear);
-//		
-//		System.out.println("Log : UserCage: "+user.getCage().size());
-//	}
 
 	public StartView() {
 		generalView.setStartView(this);
 		battlePhase.setStartView(this);
-//		userInit();
+		gamesaveView.setStartView(this);
 		
 		path=System.getProperty("user.dir");
 		String imagePath=path+"/src/Image/background.jpg";
@@ -110,7 +97,6 @@ public class StartView extends JFrame{
 		
 		//frame정의
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setSize(img.getWidth(null),img.getHeight(null)); //배경 이미지에 맞춰서 프레임의 크기 설정
 		setSize(1280,640); //현재 배경이미지 크기
 		setLocationRelativeTo(null); //프레임을 윈도우 가운데에 배치
 		setContentPane(contentPane);
@@ -213,7 +199,8 @@ public class StartView extends JFrame{
 
 	private void btnLoadListener(ActionEvent e) {
 		clip.close();
-		gamesaveView = new GameSaveView();
+//		gamesaveView = new GameSaveView();
+		gamesaveView.showSaveView();
 		
 	}
 	
@@ -229,7 +216,8 @@ public class StartView extends JFrame{
 				setLocationRelativeTo(null);
 				break;*/
 			case "SAVE":
-				gamesaveView = new GameSaveView();
+//				gamesaveView = new GameSaveView();
+				gamesaveView.showSaveView();
 				//세이브할때 처리할 것
 				break;
 			case "EXIT" :
@@ -240,28 +228,14 @@ public class StartView extends JFrame{
 	}
 	
 	public void moveNextMap(String nextMap) {
-//		if(nextMap.equals("BattlePhase")) {
-//			battlePhase.setMapCharacter();
-//			setContentPane(battlePhase);
-//			setSize(battlePhase.getBackgroundImageX(), battlePhase.getBackgroundImageY());
-//			battlePhase.requestFocus();
-//		}
-//		else {
-			generalView.setMap(nextMap);
-			setContentPane(generalView);
-			setSize(generalView.getBackgroundImageX(), generalView.getBackgroundImageY());
-			generalView.requestFocus();
-//		}
+		clip.close();
+		generalView.setMap(nextMap);
+		setContentPane(generalView);
+		setSize(generalView.getBackgroundImageX(), generalView.getBackgroundImageY());
+		generalView.requestFocus();
 
 		setLocationRelativeTo(null);
 	}
-//	public void backToBossPhase(String nextMap) {
-//		generalView.backToBossPhase();
-//		generalView.setMap(nextMap);
-//		setContentPane(generalView);
-//		setSize(generalView.getBackgroundImageX(), generalView.getBackgroundImageY());
-//		generalView.requestFocus();
-//	}
 	
 	public void moveBattlePhase(Animal animal) {
 		//이전맵에 대한 정보를 기억

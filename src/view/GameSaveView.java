@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -31,9 +33,14 @@ public class GameSaveView extends JFrame {
 	ImageIcon button;
 	Image b_img;
 	String b_path;
+	
+	StartView startView;
 
+	public void showSaveView() {
+		this.setVisible(true);
+	}
+	
 	public GameSaveView() {
-		
 		path=System.getProperty("user.dir");
 		String imagePath=path+"/src/Image/GameSaveView.jpg";
 		icon=new ImageIcon(imagePath);
@@ -51,19 +58,53 @@ public class GameSaveView extends JFrame {
         contentPane.add(button_1);
         button_1.setBounds(450, 10, 100, 40);
         button_1.setBackground(Color.white);
+        button_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				btnSaveCurrentInfo(e);
+			}
+        	
+        });
         
         //save2
         contentPane.add(button_2);
         button_2.setBounds(450, 150, 100, 40);
         button_2.setBackground(Color.white);
+        button_2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				btnSaveCurrentInfo(e);
+			}
+        	
+        });
+        
         //load1
         contentPane.add(button_3);
         button_3.setBounds(100, 10, 100, 40);
         button_3.setBackground(Color.white);
+        button_3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				btnLoadSavedInfo(e);
+			}
+        	
+        });
+        
         //load2
         contentPane.add(button_4);
         button_4.setBounds(100, 150, 100, 40);
         button_4.setBackground(Color.white);
+        button_4.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				btnLoadSavedInfo(e);
+			}
+        	
+        });
      
         //game1
         contentPane.add(label_1);
@@ -75,7 +116,8 @@ public class GameSaveView extends JFrame {
 
         setSize(img.getWidth(null),img.getHeight(null));
         setResizable(false);
-        setVisible(true);
+//        setVisible(true);
+    	setLocationRelativeTo(null);
 	}
 	
 	private void initTitle() {
@@ -86,5 +128,47 @@ public class GameSaveView extends JFrame {
 				super.paintComponent(g);
 			}
 		};
+	}
+	
+	public void setStartView(StartView startView) {
+		this.startView=startView;
+	}
+	
+	/*
+	 * listener implementation
+	 */
+	
+	//game save
+	private void btnSaveCurrentInfo(ActionEvent e) {
+		//save1
+		if(e.getSource().equals(button_1)) {
+			//current information save
+			
+			this.dispose();
+		}
+		//save2
+		else {
+			//current information save
+			
+			this.dispose();
+		}
+	}
+	
+	//game load
+	private void btnLoadSavedInfo(ActionEvent e) {
+		//load1
+		if(e.getSource().equals(button_3)) {
+			//load saved information
+			startView.moveNextMap("TrainingCityView");
+			
+			this.dispose();
+		}
+		//load2
+		else {
+			//load saved information
+			startView.moveNextMap("TrainingCityView");
+			
+			this.dispose();
+		}
 	}
 }
