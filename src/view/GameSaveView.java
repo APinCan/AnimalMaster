@@ -118,7 +118,6 @@ public class GameSaveView extends JFrame {
 
         setSize(img.getWidth(null),img.getHeight(null));
         setResizable(false);
-//        setVisible(true);
     	setLocationRelativeTo(null);
 	}
 	
@@ -139,7 +138,6 @@ public class GameSaveView extends JFrame {
 	/*
 	 * listener implementation
 	 */
-	
 	//game save
 	private void btnSaveCurrentInfo(ActionEvent e){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -151,16 +149,12 @@ public class GameSaveView extends JFrame {
 		//save1
 		if(e.getSource().equals(button_1)) {
 			//current information save
-			label_1.setText(printTime);
-			
-				try {
-					controller.saveGame(startView.getUser(), 1);
-				} catch (SQLException e1) {
-					System.out.println("SAVE FAIL 1");
-				}
-		
-				
-			
+			label_1.setText(printTime);	
+			try {
+				controller.saveGame(startView.getUser(), 1);
+			} catch (SQLException e1) {
+				System.out.println("SAVE FAIL 1");
+			}		
 		}
 		//save2
 		else {

@@ -28,9 +28,7 @@ import model.Lion;
 import model.Shark;
 import model.User;
 
-public class GeneralView extends JPanel implements View{
-	public static final String path=System.getProperty("user.dir");
-	
+public class GeneralView extends JPanel implements View{	
 	private int viewX=0;
 	private int viewY=0;
 	private String mapName;
@@ -45,27 +43,25 @@ public class GeneralView extends JPanel implements View{
 	
 	Controler controller=Controler.getInstance();
 	
+	//bossphase
 	ImageIcon characterImageIcon;
 	ImageIcon npc1ImageIcon;
 	ImageIcon npc2ImageIcon;
 	ImageIcon npc3ImageIcon;
 	ImageIcon npc4ImageIcon;
 	ImageIcon bossImageIcon;
-	
 	Image charImage;
 	Image npc1Image;
 	Image npc2Image;
 	Image npc3Image;
 	Image npc4Image;
 	Image bossImage;
-	
 	String charPath;
 	String npc1Path;
 	String npc2Path;
 	String npc3Path;
 	String npc4Path;
 	String bossPath;
-	
 	JLabel charLabel;
 	JLabel npc1Label;
 	JLabel npc2Label;
@@ -87,9 +83,7 @@ public class GeneralView extends JPanel implements View{
 			
 			limitBoundary(locationX, locationY);
 			moveNextView();
-			
-			System.out.println("x :"+charLabel.getX()+", y : "+charLabel.getY());
-		}
+			}
 	};
 	
 	private Action right=new AbstractAction(RIGHT) {
@@ -100,9 +94,7 @@ public class GeneralView extends JPanel implements View{
 			
 			limitBoundary(locationX, locationY);
 			moveNextView();
-			
-			System.out.println("x :"+charLabel.getX()+", y : "+charLabel.getY());
-		}
+			}
 	};
 	
 	private Action up = new AbstractAction(UP) {
@@ -114,9 +106,6 @@ public class GeneralView extends JPanel implements View{
 			
 			limitBoundary(locationX, locationY);
 			moveNextView();
-			
-			
-			System.out.println("x :"+charLabel.getX()+", y : "+charLabel.getY());
 		}
 	};
 	
@@ -129,8 +118,6 @@ public class GeneralView extends JPanel implements View{
 			
 			limitBoundary(locationX, locationY);
 			moveNextView();
-			
-			System.out.println("x :"+charLabel.getX()+", y : "+charLabel.getY());
 		}	
 	};
 	
@@ -208,7 +195,7 @@ public class GeneralView extends JPanel implements View{
 		try {
 			clip.close();
 		} catch(NullPointerException e) {
-			System.out.println("���� �ㅻ���� ������ ���듬����");
+			System.out.println("No music!");
 		}
 
 		String musicName="";
@@ -297,6 +284,9 @@ public class GeneralView extends JPanel implements View{
 		}
 	}
 	
+	/*
+	 * moveToOtherViews
+	 */
 	public void moveNextView() {
 		if(mapName=="TrainingCityView") {
 			moveToOtherView();
@@ -309,6 +299,7 @@ public class GeneralView extends JPanel implements View{
 		}
 	}
 	
+
 	public void moveToOtherView() {
 		int currentLocationX = charLabel.getX();
 		int currentLocationY = charLabel.getY();
@@ -414,6 +405,9 @@ public class GeneralView extends JPanel implements View{
 		}		
 	}
 	
+	/*
+	 * bossphase
+	 */
 	public void setNPCHunter() {
 		npc1Path=path+"/src/Image/Npc1.jpg";
 		npc1ImageIcon=new ImageIcon(npc1Path);
@@ -471,6 +465,13 @@ public class GeneralView extends JPanel implements View{
 		bossLabel.setVisible(true);
 	}
 	
+	public String getCurrentMap() {
+		return this.mapName;
+	}
+	
+	/*
+	 * inBattleThread
+	 */
 	private class meetAnimalThread extends Thread{
 		Controler con = Controler.getInstance();
 		public void run() {
@@ -490,11 +491,7 @@ public class GeneralView extends JPanel implements View{
 			startView.moveBattlePhase(popAnimal);
 		}
 	}
-	
-	public String getCurrentMap() {
-		return this.mapName;
-	}
-	
+
 	public void threadRun(){
 		thread = new meetAnimalThread();
 		thread.start();

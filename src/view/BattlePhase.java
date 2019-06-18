@@ -89,9 +89,6 @@ public class BattlePhase extends JPanel implements View {
 			int locationY = ticLabel.getY();
 			
 			limitBoundary(locationX, locationY);
-
-			
-			System.out.println("x :"+ticLabel.getX()+", y : "+ticLabel.getY());
 		}
 	};
 	
@@ -102,10 +99,6 @@ public class BattlePhase extends JPanel implements View {
 			int locationY = ticLabel.getY();
 			
 			limitBoundary(locationX, locationY);
-
-			
-			System.out.println("x :"+ticLabel.getX()+", y : "+ticLabel.getY());
-		
 		}
 	};
 	
@@ -186,13 +179,11 @@ public class BattlePhase extends JPanel implements View {
 			clip.loop(5);
 			clip.start();
 		} catch(Exception e) {
-			e.printStackTrace();
 			System.out.println("No Music!");
 		}
 	}
 	
-	public void setMenu() {
-		
+	public void setMenu() {	
 		setLayout(null);
 		
 		menu1Path=path+"/src/Image/Attack.jpg";
@@ -261,9 +252,7 @@ public class BattlePhase extends JPanel implements View {
 		this.prevMap=prevMap;
 		this.user=user;
 		this.hunter=null;
-		
-		System.out.println("Log : prevMap : "+this.prevMap);
-		
+				
 		setYourAnimal(animal);
 		setMyAnimal(user);
 	}
@@ -273,9 +262,7 @@ public class BattlePhase extends JPanel implements View {
 		this.prevMap="BossPhase";
 		this.user=user;
 		this.hunter=player;
-		
-		System.out.println("Log : prevMap : "+this.prevMap);
-		
+				
 		Animal firstAni=player.getCage().get(0);
 		
 		setYourAnimal(firstAni);
@@ -286,6 +273,9 @@ public class BattlePhase extends JPanel implements View {
 		this.startView=startView;
 	}
 	
+	/*
+	 * Animal setting
+	 */
 	private void setYourAnimal(Animal animal) {
 		System.out.println("Log : setYourAnimal");
 		//애니멀이 무엇인가?
@@ -294,7 +284,7 @@ public class BattlePhase extends JPanel implements View {
 		yourAnimal=animal;
 		
 		yourLabel.setIcon(yourAnimalIcon);
-		yourLabel.setLocation(150,20);
+		yourLabel.setLocation(200,20);
 		yourLabel.setSize(yourAnimalIcon.getIconWidth(), yourAnimalIcon.getIconHeight());
 		
 		this.add(yourLabel);
@@ -302,20 +292,16 @@ public class BattlePhase extends JPanel implements View {
 	}
 	
 	private void setMyAnimal(User user) {
-		System.out.println("Log : setMyAnimal");
 		this.user = user;
 	
 		Animal currentUserAnimal = user.getCage().get(userAnimalIndex);
 		myAnimal = currentUserAnimal;
-		System.out.println("Log : currentAnimal: "+currentUserAnimal.getHp());
 		
 		String animalImagePath = currentUserAnimal.getImagePath();
-		
-		System.out.println("Log : currentUserAnimalLocation : "+animalImagePath);
-		
+				
 		ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
 		userLabel.setIcon(myAnimalIcon);
-		userLabel.setLocation(10,50);
+		userLabel.setLocation(30,50);
 		userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
 		
 		this.add(userLabel);
@@ -355,9 +341,7 @@ public class BattlePhase extends JPanel implements View {
 		if(user.getCage().size()<=userAnimalIndex) {
 			userAnimalIndex=0;
 		}
-		
-		System.out.println("Log : userAnimalIndex : "+userAnimalIndex);
-		
+			
 		setMyAnimal(user);
 	}
 	
@@ -389,7 +373,7 @@ public class BattlePhase extends JPanel implements View {
 	
 	private void attackAnimal() {
 		System.out.println("Log : myAnimal maxHp: "+myAnimal.getMaxHp());
-		System.out.println("Log : yourAnimal maxHP: "+yourAnimal.getHp());
+		System.out.println("Log : yourAnimal maxHP: "+yourAnimal.getMaxHp());
 		System.out.println("Log : myAnimal HP : "+myAnimal.getHp());
 		System.out.println("Log : yourAnimal Hp: "+yourAnimal.getHp());
 		
