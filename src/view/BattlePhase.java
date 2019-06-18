@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -183,7 +184,7 @@ public class BattlePhase extends JPanel implements View {
 		}
 	}
 	
-	public void setMenu() {	
+	public void setMenu() {
 		setLayout(null);
 		
 		menu1Path=path+"/src/Image/Attack.jpg";
@@ -284,7 +285,7 @@ public class BattlePhase extends JPanel implements View {
 		yourAnimal=animal;
 		
 		yourLabel.setIcon(yourAnimalIcon);
-		yourLabel.setLocation(200,20);
+		yourLabel.setLocation(200,-80);
 		yourLabel.setSize(yourAnimalIcon.getIconWidth(), yourAnimalIcon.getIconHeight());
 		
 		this.add(yourLabel);
@@ -301,7 +302,7 @@ public class BattlePhase extends JPanel implements View {
 				
 		ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
 		userLabel.setIcon(myAnimalIcon);
-		userLabel.setLocation(30,50);
+		userLabel.setLocation(50,80);
 		userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
 		
 		this.add(userLabel);
@@ -372,6 +373,10 @@ public class BattlePhase extends JPanel implements View {
 	}
 	
 	private void attackAnimal() {
+		System.out.println("Log : myAnimal maxHp: "+myAnimal.getMaxHp());
+		System.out.println("Log : yourAnimal maxHP: "+yourAnimal.getMaxHp());
+		System.out.println("Log : myAnimal HP : "+myAnimal.getHp());
+		System.out.println("Log : yourAnimal Hp: "+yourAnimal.getHp());
 		System.out.println("Log : myAnimal maxHp: "+myAnimal.getMaxHp());
 		System.out.println("Log : yourAnimal maxHP: "+yourAnimal.getMaxHp());
 		System.out.println("Log : myAnimal HP : "+myAnimal.getHp());
