@@ -1,6 +1,7 @@
 package view;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import model.*;
@@ -49,7 +50,7 @@ public class Controler {
 		}
 	}
 
-	private static class Singleton { // 싱글톤을 위한 클래스
+	private static class Singleton { // �깃��ㅼ�� ���� �대����
 		public static final Controler INSTANCE = new Controler();
 	}
 
@@ -57,7 +58,7 @@ public class Controler {
 		return Singleton.INSTANCE;
 	}
 
-	// 수정완료
+	// ������猷�
 	private Animal randAnimal(int map) {
 		Animal ani;
 		int per = ran.nextInt(10);
@@ -93,14 +94,14 @@ public class Controler {
 		return ani;
 	}
 
-	// map => 0 : 해변, 1 : 사막, 2 : 숲
+	// map => 0 : �대�, 1 : �щ�, 2 : ��
 	public Animal meetAnimal(int map) {
 		if (ran.nextInt(10) < 3)
 			return randAnimal(map);
 		return null;
 	}
 
-	// 수정완료
+	// ������猷�
 	public void calcHP(Animal ani1, Animal ani2) {
 		int t1 = ani1.getPropertyType(), t2 = ani2.getPropertyType();
 		double adv1, adv2;
@@ -143,7 +144,7 @@ public class Controler {
 		}
 	}
 
-	// 수정완료
+	// ������猷�
 	public boolean catchAnimal(Animal ani) {
 		int hp = ani.getHp();
 		int per;
@@ -161,7 +162,7 @@ public class Controler {
 		return false;
 	}
 
-	// 수정 완료
+	// ���� ��猷�
 	public void winBattle(Animal winner, Animal loser) {
 		double plusPower = 0.05 * loser.getPower();
 		double plusMaxHp = 0.05 * loser.getHp();
@@ -181,7 +182,7 @@ public class Controler {
 		loser.setHp(loser.getHp());
 	}
 
-	// view 에서 어떤식으로 save, load 할지 확인 후 수정예정
+	// view ���� �대�ㅼ���쇰� save, load ��吏� ���� �� ��������
 	public void saveGame(User user, int saveNum) throws SQLException {
 		DAO db = new DAO();
 		db.save(user, saveNum);

@@ -235,6 +235,7 @@ public class StartView extends JFrame{
 		generalView.requestFocus();
 
 		setLocationRelativeTo(null);
+		//generalView.threadRun();
 	}
 	
 	public void moveBattlePhase(Animal animal) {

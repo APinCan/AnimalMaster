@@ -206,7 +206,7 @@ public class GeneralView extends JPanel implements View{
 		try {
 			clip.close();
 		} catch(NullPointerException e) {
-			System.out.println("현재 설된된 음악이 없습니다");
+			System.out.println("���� �ㅻ���� ������ ���듬����");
 		}
 
 		String musicName="";
@@ -479,7 +479,7 @@ public class GeneralView extends JPanel implements View{
 					break;
 				}
 				try {
-					Thread.sleep(1000); 
+					Thread.sleep(2000); 
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

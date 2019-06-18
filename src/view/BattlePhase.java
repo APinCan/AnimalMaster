@@ -108,6 +108,7 @@ public class BattlePhase extends JPanel implements View {
 		public void actionPerformed(ActionEvent e) {
 			if(ticLabel.getX()==40) {
 				System.out.println("attack");
+				//controler.calcHP(setMyAnimal(user),setYourAnimal(animal));
 			}
 			else if(ticLabel.getX()==165) {
 				System.out.println("defense");
@@ -291,5 +292,41 @@ public class BattlePhase extends JPanel implements View {
 		
 		this.add(userLabel);
 		userLabel.setVisible(true);
+		/*if(animal=="Jellyfish") {
+		Animal currentUserAnimal = user.getCage().get(0);
+		String animalImagePath = currentUserAnimal.getImagePath();
+		
+		ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
+		userLabel.setIcon(myAnimalIcon);
+		userLabel.setLocation(10,50);
+		userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
+		
+		this.add(userLabel);
+		userLabel.setVisible(true);
+		}
+		else if(animal == "Shark") {
+			Animal currentUserAnimal = user.getCage().get(1);
+			String animalImagePath = currentUserAnimal.getImagePath();
+			
+			ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
+			userLabel.setIcon(myAnimalIcon);
+			userLabel.setLocation(10,50);
+			userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
+			
+			this.add(userLabel);
+			userLabel.setVisible(true);
+		}
+		else if(animal == "Lion") {
+			Animal currentUserAnimal = user.getCage().get(2);
+			String animalImagePath = currentUserAnimal.getImagePath();
+			
+			ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
+			userLabel.setIcon(myAnimalIcon);
+			userLabel.setLocation(10,50);
+			userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
+			
+			this.add(userLabel);
+			userLabel.setVisible(true);
+		}*/
 	}
 }
