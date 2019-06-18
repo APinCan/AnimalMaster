@@ -181,7 +181,7 @@ public class Controler {
 	public void saveGame(User user, int saveNum) throws SQLException {
 		DAO db = new DAO();
 		db.save(user, saveNum);
-	}
+	} 
 
 	public User loadGame(int loadNum) throws SQLException {
 		DAO db = new DAO();

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -37,6 +38,7 @@ public class GameSaveView extends JFrame {
 	String b_path;
 	
 	StartView startView;
+	Controler controller=Controler.getInstance();
 
 	public void showSaveView() {
 		this.setVisible(true);
@@ -151,18 +153,27 @@ public class GameSaveView extends JFrame {
 		//save1
 		if(e.getSource().equals(button_1)) {
 			//current information save
-
 			label_1.setText(printTime);
-			
-			this.dispose();
+			try {
+				controller.saveGame(startView.getUser(), 1);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("SAVE FAIL 1");
+			}
 		}
 		//save2
 		else {
 			//current information save
 			label_2.setText(printTime);
-			
-			this.dispose();
+			try {
+				controller.saveGame(startView.getUser(), 2);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("SAVE FAIL 2");
+			}
 		}
+		
+		this.dispose();
 	}
 	
 	//game load
@@ -171,15 +182,27 @@ public class GameSaveView extends JFrame {
 		if(e.getSource().equals(button_3)) {
 			//load saved information
 			startView.moveNextMap("TrainingCityView");
-			
-			this.dispose();
+
+			try {
+				startView.loadUser(controller.loadGame(1));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("LOAD FAIL 1");
+			}
 		}
 		//load2
 		else {
 			//load saved information
 			startView.moveNextMap("TrainingCityView");
 			
-			this.dispose();
+			try {
+				startView.loadUser(controller.loadGame(2));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("LOAD FAIL 2");
+			}
 		}
+		
+		this.dispose();
 	}
 }

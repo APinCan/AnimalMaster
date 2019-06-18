@@ -266,4 +266,11 @@ public class StartView extends JFrame{
 		setLocationRelativeTo(null);
 	}
 
+	public User getUser() {
+		return this.user;
+	}
+	
+	public void loadUser(User user) {
+		this.user=user;
+	}
 }
