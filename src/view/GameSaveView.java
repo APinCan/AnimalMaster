@@ -65,7 +65,6 @@ public class GameSaveView extends JFrame {
         button_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				btnSaveCurrentInfo(e);
 			}
         	
@@ -78,7 +77,6 @@ public class GameSaveView extends JFrame {
         button_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				btnSaveCurrentInfo(e);
 			}
         	
@@ -143,7 +141,7 @@ public class GameSaveView extends JFrame {
 	 */
 	
 	//game save
-	private void btnSaveCurrentInfo(ActionEvent e) {
+	private void btnSaveCurrentInfo(ActionEvent e){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date time = new Date();
 		
@@ -154,12 +152,15 @@ public class GameSaveView extends JFrame {
 		if(e.getSource().equals(button_1)) {
 			//current information save
 			label_1.setText(printTime);
-			try {
-				controller.saveGame(startView.getUser(), 1);
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				System.out.println("SAVE FAIL 1");
-			}
+			
+				try {
+					controller.saveGame(startView.getUser(), 1);
+				} catch (SQLException e1) {
+					System.out.println("SAVE FAIL 1");
+				}
+		
+				
+			
 		}
 		//save2
 		else {

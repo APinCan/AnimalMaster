@@ -105,6 +105,7 @@ public class BattlePhase extends JPanel implements View {
 
 			
 			System.out.println("x :"+ticLabel.getX()+", y : "+ticLabel.getY());
+		
 		}
 	};
 	
@@ -112,6 +113,10 @@ public class BattlePhase extends JPanel implements View {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(ticLabel.getX()==40) {
+				int[] win = user.getWin();
+				for(int i=0;i<5;i++) {
+				System.out.println("User : "+win[0]);
+				}
 				System.out.println("attack");
 				attackAnimal();
 			}
@@ -425,9 +430,5 @@ public class BattlePhase extends JPanel implements View {
 				runFromBattle();
 			}
 		}
-	}
-	
-	private void showStatut() {
-		myAnimal.getMaxHp();
 	}
 }

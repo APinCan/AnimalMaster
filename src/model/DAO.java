@@ -15,9 +15,9 @@ public class DAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs; 
 	
-	String dbURL="jdbc:mysql://localhost:3306/javaproject?characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+	String dbURL="jdbc:mysql://localhost:3306/javaproject?characterEncoding=UTF-8&serverTimezone=UTC";
 	String dbID="root";
-	String dbPassword="";
+	String dbPassword="jimin1306";
 	
 	public DAO() {
 		try {
@@ -34,14 +34,13 @@ public class DAO {
 	}
 	
 	public void create() {
-		String query = "CREATE TABLES IF NOT EXISTS user(" + 
+		String query = "CREATE TABLE IF NOT EXISTS user(" + 
 				"userid INT NOT NULL," + 
 				"npc1 INT NOT NULL," + 
 				"npc2 INT NOT NULL," + 
 				"npc3 INT NOT NULL," + 
 				"npc4 INT NOT NULL," + 
 				"npc5 INT NOT NULL," + 
-				"date DATE NOT NULL," + 
 				"PRIMARY KEY (userid));";
 		try {
 			pstmt = conn.prepareStatement(query);		
@@ -50,7 +49,7 @@ public class DAO {
 			e.printStackTrace();
 		}
 		
-		query = "CREATE TABLES IF NOT EXISTS animal("+
+		query = "CREATE TABLE IF NOT EXISTS animal("+
 				"userid INT,"+
 				"typeid INT,"+
 				"animalid INT AUTO_INCREMENT,"+
@@ -65,71 +64,75 @@ public class DAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
+			System.out.println("table 생성 에러");
 			e.printStackTrace();
 		}
 				
 	}
 	
-	public void save(User user, int buttonIndex) throws SQLException {
+	public void save(User user, int buttonIndex) {
 		
-		java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 		
-		//save를 슬롯 2개에서만 할 것이므로 userid1,2인 row만 미리 insert 해놓음
-		String query = "insert into user (userid) values (?)";
+		removeAnimal(buttonIndex);
+		//새로 동물 정보를 업데이트 하기 위해 이전의 동물 정보들 삭제 (참조무결성 때문에 참조하는 테이블 컬럼 먼저 삭제x)
+		
+		//미리 insert할 곳의 값을 지워놓음 
+		String query = "DELETE FROM user WHERE `userid` = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, 1);
-			pstmt.executeUpdate();
-			pstmt.setInt(1, 2);
+			pstmt.setInt(1, buttonIndex);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
 	
-		query = "UPDATE user SET (npc1,npc2,npc3,npc4,npc5,date) values (?,?,?,?,?,?) WHERE userid=?";
+		query = "INSERT INTO user (userid,npc1,npc2,npc3,npc4,npc5) values (?,?,?,?,?,?)";
 			
 		//String query = "insert into user (npc1,npc2,npc3,npc4,npc5,date) values (?,?,?,?,?,?)";
 		int win[] = user.getWin();
-		if(buttonIndex == 1) {
-			pstmt = conn.prepareStatement(query);
-			for(int i=0;i<5;i++) {
-				pstmt.setInt(i+1, win[i]);
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, buttonIndex);
+				for(int i=0;i<5;i++) {
+					pstmt.setInt(i+2, win[i]);  
+				}
+				pstmt.executeUpdate();
+			} catch (SQLException e1) {
+				System.out.println("User 정보 insert 실패");
 			}
-			pstmt.setTimestamp(6, date);
-			pstmt.setInt(7, buttonIndex);
-		}
+			
 		
-		removeAnimal(buttonIndex);
-		//새로 동물 정보를 업데이트 하기 위해 이전의 동물 정보들 삭제 
+	
 		
 		query = "insert into animal (userid,typeid,hp,power,armor,evasion) values (?,?,?,?,?,?)";		
 		ArrayList<Animal> animalArr = user.getCage();		
 		int size = animalArr.size();
 		int i=0;
 		while(size>0) {
-		try {
-			Animal a = animalArr.get(i);
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, buttonIndex);
-			pstmt.setInt(2, a.gettypeid());
-			pstmt.setInt(3, a.getHp());
-			pstmt.setInt(4, a.getPower());
-			pstmt.setInt(5, a.getArmor());
-			pstmt.setInt(6, a.getEvasion());
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				Animal a = animalArr.get(i);
+				pstmt = conn.prepareStatement(query);		
+				pstmt.setInt(1, buttonIndex);
+				pstmt.setInt(2, a.gettypeid());
+				pstmt.setInt(3, a.getHp());
+				pstmt.setInt(4, a.getPower());
+				pstmt.setInt(5, a.getArmor());
+				pstmt.setInt(6, a.getEvasion());
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
 		
-		}
-		i++;
-		size--;
-		}
+			}
+			i++;
+			size--;
+		 }
 		
 	}
 	
 	public void removeAnimal(int buttonIndex) {
 		//buttonIndex에 해당하는 userid의 동물 정보들을 삭제 
-		String query = "DELETE FROM animal WHERE userid = ?";
+		String query = "DELETE FROM animal WHERE `userid` = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, buttonIndex);
@@ -160,12 +163,14 @@ public class DAO {
 	}
 	
 	*/
-	public User load(int index) throws SQLException {
+	public User load(int index) {
 		//세이브 파일 목록에서 번호 선택하면 그 번호 파일정보 로드
 		User user = new User();
-		String query = "SELECT * FROM user where userid='index'";
+		String query = "SELECT * FROM user where userid=?";
 		try {
+			
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, index);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				for(int i=0;i<5;i++) {
@@ -173,28 +178,37 @@ public class DAO {
 					System.out.println(rs.getInt(i+2));
 				}
 			}//승패정보 저장
+			
+			
 						
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("User win load 실패");
 		}
+		
 		
 		query = "SELECT * FROM animal where userid=?";
 		
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, index);
-			rs = pstmt.executeQuery();
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setInt(1, index);
+				rs = pstmt.executeQuery();
 
-			while(rs.next()) {
-				int typeid = rs.getInt("typeid");
-				Animal ani = returnAnimal(typeid);
-				ani.setHp(rs.getInt(4));
-				ani.setPower(rs.getInt(5));
-				ani.setArmor(rs.getInt(6));
-				ani.setEvasion(rs.getInt(7));
-				user.getCage().add(ani);
-				System.out.println(ani.getHp());
+				while(rs.next()) {
+					int typeid = rs.getInt("typeid");
+					Animal ani = returnAnimal(typeid);					
+										
+					ani.setHp(rs.getInt(4));
+					ani.setPower(rs.getInt(5));
+					ani.setArmor(rs.getInt(6));
+					ani.setEvasion(rs.getInt(7));
+					user.getCage().add(ani);
+					System.out.println(ani.getPower());
+				}
+			} catch (SQLException e) {
+				System.out.println("user animal 정보 load 실패");
 			}
-	
+		
 		return user;
 	}
 	
@@ -209,31 +223,31 @@ public class DAO {
 		//typeid에 맞는 동물들을 생성해 리턴
 		switch (typeid) {
 		case 1:
-			Shark sh = new Shark();
+			Animal sh = new Shark();
 			return sh;
 		case 2:
-			Deer de = new Deer();
+			Animal de = new Deer();
 			return de;
 		case 3:
-			Jellyfish jell = new Jellyfish();
+			Animal jell = new Jellyfish();
 			return jell;
 		case 4:
-			Lion lion = new Lion();
+			Animal lion = new Lion();
 			return lion;
 		case 5:
-			Wolf wolf = new Wolf();
+			Animal wolf = new Wolf();
 			return wolf;
 		case 6:
-			Fox fox = new Fox();
+			Animal fox = new Fox();
 			return fox;
 		case 7:
-			Bear bear = new Bear();
+			Animal bear = new Bear();
 			return bear;
 		case 8:
-			Dog dog = new Dog();
+			Animal dog = new Dog();
 			return dog;
 		case 9:
-			Mouse mouse = new Mouse();
+			Animal mouse = new Mouse();
 			return mouse;			
 		}
 		
