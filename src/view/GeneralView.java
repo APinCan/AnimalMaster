@@ -43,6 +43,8 @@ public class GeneralView extends JPanel implements View{
 	User user;
 	Hunter hunter1, hunter2, hunter3, hunter4, boss;
 	
+	Controler controller=Controler.getInstance();
+	
 	ImageIcon characterImageIcon;
 	ImageIcon npc1ImageIcon;
 	ImageIcon npc2ImageIcon;
@@ -386,19 +388,20 @@ public class GeneralView extends JPanel implements View{
 		int currentLocationY = charLabel.getY();
 		if(mapName=="BossPhase") {
 			if(currentLocationX==285 && currentLocationY==750) {
-				startView.moveBattlePhase(hunter1);
+				startView.moveBattlePhase(controller.getNPC(0));
 			}
 			else if(currentLocationX==365 && currentLocationY==460) {
-				startView.moveBattlePhase(hunter2);
+				startView.moveBattlePhase(controller.getNPC(1));
 			}
 			else if(currentLocationX ==410 && currentLocationY == 400) {
-				startView.moveBattlePhase(hunter3);
+				startView.moveBattlePhase(controller.getNPC(2));
 			}
 			else if(currentLocationX == 285 && currentLocationY==260) {
-				startView.moveBattlePhase(hunter4);
-			}	
+				startView.moveBattlePhase(controller.getNPC(3));
+			}
+			//보스만났을때
 			else if(currentLocationX == 285 && currentLocationY==120) {
-				startView.moveBattlePhase(boss);
+				startView.moveBattlePhase(controller.getNPC(4));
 			}	
 			else if((currentLocationX>=285 && currentLocationX<=340) && currentLocationY==860){
 				startView.moveNextMap("TrainingCityView");

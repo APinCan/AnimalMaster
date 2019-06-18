@@ -83,6 +83,12 @@ public class StartView extends JFrame{
 		battlePhase.setStartView(this);
 		gamesaveView.setStartView(this);
 		
+		/*
+		 * 임시초기화 테스트
+		 */
+		user.cage.add(new Mouse());
+		
+		
 		path=System.getProperty("user.dir");
 		String imagePath=path+"/src/Image/background.jpg";
 		icon=new ImageIcon(imagePath);

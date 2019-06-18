@@ -28,11 +28,16 @@ public class BattlePhase extends JPanel implements View {
 	
 	StartView startView;
 	GeneralView generalView;
+	Controler controller = Controler.getInstance();
 	//다른 맵에서 배틀페이즈를 띄웠는데 도망가기시에 보스페이즈로가는 문제 발생
 	String prevMap="";
 	
-	User user;
-	Hunter hunter;
+	User user=null;
+	Hunter hunter=null;
+	int userAnimalIndex=0;
+	int hunterAnimalIndex=0;
+	Animal myAnimal;
+	Animal yourAnimal;
 	
 	ImageIcon icon;
 	Clip clip;
@@ -108,17 +113,18 @@ public class BattlePhase extends JPanel implements View {
 		public void actionPerformed(ActionEvent e) {
 			if(ticLabel.getX()==40) {
 				System.out.println("attack");
-				//controler.calcHP(setMyAnimal(user),setYourAnimal(animal));
+				attackAnimal();
 			}
 			else if(ticLabel.getX()==165) {
-				System.out.println("defense");
+				System.out.println("catch!");
+				catchAnimal();
 			}
 			else if(ticLabel.getX()==290) {
 				System.out.println("change");
+				changeAnimal();
 			}
 			else if(ticLabel.getX()==415) {
-				clip.close();
-				startView.moveNextMap(prevMap);
+				runFromBattle();
 			}
 		}
 	};
@@ -257,8 +263,16 @@ public class BattlePhase extends JPanel implements View {
 	
 	public void setMapCharacter(User user, Hunter player) {
 		this.setMap("BattlePhase");
-		
 		this.prevMap="BossPhase";
+		this.user=user;
+		this.hunter=player;
+		
+		System.out.println("Log : prevMap : "+this.prevMap);
+		
+		Animal firstAni=player.getCage().get(0);
+		
+		setYourAnimal(firstAni);
+		setMyAnimal(user);
 	}
 	
 	public void setStartView(StartView startView) {
@@ -269,8 +283,9 @@ public class BattlePhase extends JPanel implements View {
 		System.out.println("Log : setYourAnimal");
 		//애니멀이 무엇인가?
 		String animalImagePath=animal.getImagePath();
-		
 		ImageIcon yourAnimalIcon = new ImageIcon(animalImagePath);
+		yourAnimal=animal;
+		
 		yourLabel.setIcon(yourAnimalIcon);
 		yourLabel.setLocation(150,20);
 		yourLabel.setSize(yourAnimalIcon.getIconWidth(), yourAnimalIcon.getIconHeight());
@@ -281,9 +296,13 @@ public class BattlePhase extends JPanel implements View {
 	
 	private void setMyAnimal(User user) {
 		System.out.println("Log : setMyAnimal");
+		this.user = user;
 	
-		Animal currentUserAnimal = user.getCage().get(0);
+		Animal currentUserAnimal = user.getCage().get(userAnimalIndex);
+		myAnimal = currentUserAnimal;
 		String animalImagePath = currentUserAnimal.getImagePath();
+		
+		System.out.println("Log : currentUserAnimalLocation : "+animalImagePath);
 		
 		ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
 		userLabel.setIcon(myAnimalIcon);
@@ -328,5 +347,70 @@ public class BattlePhase extends JPanel implements View {
 			this.add(userLabel);
 			userLabel.setVisible(true);
 		}*/
+	}
+	
+	/*
+	 *  battle scenario
+	 */
+
+	
+	/*
+	 * key listener sets
+	 */
+	private void changeAnimal() {
+		userAnimalIndex++;
+		System.out.println("Log : users cageSize() : "+user.getCage().size());
+		
+		if(user.getCage().size()<=userAnimalIndex) {
+			userAnimalIndex=0;
+		}
+		
+		System.out.println("Log : userAnimalIndex : "+userAnimalIndex);
+		
+		setMyAnimal(user);
+	}
+	
+	private void runFromBattle() {
+		clip.close();
+		this.userAnimalIndex=0;
+		
+		startView.moveNextMap(prevMap);
+	}
+	
+	private void catchAnimal() {
+		//catch
+		if(controller.catchAnimal(yourAnimal)){
+			System.out.println("잡기 성공!");
+			user.cage.add(yourAnimal);
+		}
+		//not catch
+		else {
+			System.out.println("잡기 실패!");
+		}
+	}
+	
+	private void attackAnimal() {
+		controller.calcHP(myAnimal, yourAnimal);
+		
+		System.out.println(myAnimal.getHp());
+		System.out.println(yourAnimal.getHp());
+		
+//		if(hunter==null) {
+//			
+//		}
+//		
+//		
+//		
+//		if(yourAnimal.getHp()==0) {
+//			hunterAnimalIndex++;
+//			try {
+//				Animal hunterAnimal=hunter.getCage().get(hunterAnimalIndex);
+//			} catch(Exception e) {
+//				System.out.println("Hunter has no animal");
+//			}
+//		}
+//		else if(myAnimal.getHp()==0) {
+//			runFromBattle();
+//		}
 	}
 }
