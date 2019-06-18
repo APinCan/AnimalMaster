@@ -238,7 +238,6 @@ public class GeneralView extends JPanel implements View{
 			clip.loop(3);
 			clip.start();
 		} catch(Exception e) {
-			e.printStackTrace();
 			System.out.println("No Music!");
 		}
 	}

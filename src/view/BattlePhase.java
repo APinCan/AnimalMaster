@@ -426,4 +426,8 @@ public class BattlePhase extends JPanel implements View {
 			}
 		}
 	}
+	
+	private void showStatut() {
+		myAnimal.getMaxHp();
+	}
 }
