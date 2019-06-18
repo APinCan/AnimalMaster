@@ -352,7 +352,25 @@ public class BattlePhase extends JPanel implements View {
 	/*
 	 *  battle scenario
 	 */
-
+	private void ifEnding() {
+		int []win = user.getWin();
+		int tmp=0;
+		
+		for(int i=0;i<win.length;i++) {
+			if(win[i]==1) {
+				tmp++;
+			}
+		}
+	
+		if(tmp==win.length) {
+			//victory
+			System.out.println("Victory!");
+			System.exit(0);
+		}
+		else {
+			runFromBattle();
+		}
+	}
 	
 	/*
 	 * key listener sets
@@ -373,6 +391,7 @@ public class BattlePhase extends JPanel implements View {
 	private void runFromBattle() {
 		clip.close();
 		this.userAnimalIndex=0;
+		this.hunterAnimalIndex=0;
 		
 		startView.moveNextMap(prevMap);
 	}
@@ -380,12 +399,18 @@ public class BattlePhase extends JPanel implements View {
 	private void catchAnimal() {
 		//catch
 		if(controller.catchAnimal(yourAnimal)){
-			System.out.println("잡기 성공!");
-			user.cage.add(yourAnimal);
+			System.out.println("catch success!");
+			
+			if(user.getCage().size()>6) {
+				System.out.println("cage is full");
+			}
+			else {
+				user.cage.add(yourAnimal);
+			}
 		}
 		//not catch
 		else {
-			System.out.println("잡기 실패!");
+			System.out.println("catch fail");
 		}
 	}
 	
@@ -395,22 +420,37 @@ public class BattlePhase extends JPanel implements View {
 		System.out.println(myAnimal.getHp());
 		System.out.println(yourAnimal.getHp());
 		
-//		if(hunter==null) {
-//			
-//		}
-//		
-//		
-//		
-//		if(yourAnimal.getHp()==0) {
-//			hunterAnimalIndex++;
-//			try {
-//				Animal hunterAnimal=hunter.getCage().get(hunterAnimalIndex);
-//			} catch(Exception e) {
-//				System.out.println("Hunter has no animal");
-//			}
-//		}
-//		else if(myAnimal.getHp()==0) {
-//			runFromBattle();
-//		}
+		if(yourAnimal.getHp()==0) {
+			//fight to wild
+			if(hunter==null) {
+				controller.winBattle(myAnimal, yourAnimal);
+				runFromBattle();
+			}
+			//fight to hunter
+			else {
+				hunterAnimalIndex++;
+				try {
+					Animal hunterAnimal=hunter.getCage().get(hunterAnimalIndex);
+					setYourAnimal(hunterAnimal);
+				} catch(Exception e) {
+					System.out.println("Hunter has no animal");
+					controller.winBattle(myAnimal, yourAnimal);
+					user.setWin(hunter.id, 1);
+					runFromBattle();
+				}
+			}				
+		}
+		else if(myAnimal.getHp()==0) {
+			//set next myanimal
+			userAnimalIndex++;
+			
+			//if outOfBoundOfArray -> no available animal -> exception -> end
+			try {
+				setMyAnimal(user);
+			} catch(Exception e) {
+				System.out.println("User has no animal");
+				runFromBattle();
+			}
+		}
 	}
 }

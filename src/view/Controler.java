@@ -15,6 +15,7 @@ public class Controler {
 		npc = new Hunter[5];
 		for (int i = 0; i < 5; i++) {
 			npc[i] = new Hunter();
+			npc[i].id=i;
 			npc[i].cage = new ArrayList<Animal>();
 			Animal ani = new Mouse();
 			ani.setMaxHp(ani.getHp() + i * 10);
@@ -50,7 +51,7 @@ public class Controler {
 		}
 	}
 
-	private static class Singleton { // �깃��ㅼ�� ���� �대����
+	private static class Singleton {
 		public static final Controler INSTANCE = new Controler();
 	}
 
@@ -58,7 +59,6 @@ public class Controler {
 		return Singleton.INSTANCE;
 	}
 
-	// ������猷�
 	private Animal randAnimal(int map) {
 		Animal ani;
 		int per = ran.nextInt(10);
@@ -94,14 +94,12 @@ public class Controler {
 		return ani;
 	}
 
-	// map => 0 : �대�, 1 : �щ�, 2 : ��
 	public Animal meetAnimal(int map) {
 		if (ran.nextInt(10) < 3)
 			return randAnimal(map);
 		return null;
 	}
 
-	// ������猷�
 	public void calcHP(Animal ani1, Animal ani2) {
 		int t1 = ani1.getPropertyType(), t2 = ani2.getPropertyType();
 		double adv1, adv2;
@@ -144,7 +142,6 @@ public class Controler {
 		}
 	}
 
-	// ������猷�
 	public boolean catchAnimal(Animal ani) {
 		int hp = ani.getHp();
 		int per;
@@ -162,7 +159,6 @@ public class Controler {
 		return false;
 	}
 
-	// ���� ��猷�
 	public void winBattle(Animal winner, Animal loser) {
 		double plusPower = 0.05 * loser.getPower();
 		double plusMaxHp = 0.05 * loser.getHp();
@@ -182,7 +178,6 @@ public class Controler {
 		loser.setHp(loser.getHp());
 	}
 
-	// view ���� �대�ㅼ���쇰� save, load ��吏� ���� �� ��������
 	public void saveGame(User user, int saveNum) throws SQLException {
 		DAO db = new DAO();
 		db.save(user, saveNum);
