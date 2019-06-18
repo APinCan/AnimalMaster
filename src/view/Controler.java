@@ -25,7 +25,7 @@ public class Controler {
 			ani.setPower(ani.getPower() + i * 10);
 			npc[i].cage.add(ani);
 			
-			ani = new Lion();
+			ani = new Deer();
 			ani.setMaxHp(ani.getHp() + i * 10);
 			ani.setHp(ani.getMaxHp());
 			ani.setArmor(ani.getArmor() + i * 10);
@@ -33,7 +33,7 @@ public class Controler {
 			ani.setPower(ani.getPower() + i * 10);
 			npc[i].cage.add(ani);
 			
-			ani = new Shark();
+			ani = new Fox();
 			ani.setMaxHp(ani.getHp() + i * 10);
 			ani.setHp(ani.getMaxHp());
 			ani.setArmor(ani.getArmor() + i * 10);
@@ -41,7 +41,7 @@ public class Controler {
 			ani.setPower(ani.getPower() + i * 10);
 			npc[i].cage.add(ani);
 			
-			ani = new Bear();
+			ani = new Dog();
 			ani.setMaxHp(ani.getHp() + i * 10);
 			ani.setHp(ani.getMaxHp());
 			ani.setArmor(ani.getArmor() + i * 10);

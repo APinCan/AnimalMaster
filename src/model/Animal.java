@@ -2,7 +2,7 @@ package model;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Animal {
+public abstract class Animal {
 	
 	String path=System.getProperty("user.dir");
 	
@@ -54,7 +54,8 @@ public class Animal {
 		this.actionType = actionType;
 	}
 
-	public Animal(int propertyType, int hp, int maxHp, int power, int armor, int evasion) {
+	public Animal(int typeid,int propertyType, int hp, int maxHp, int power, int armor, int evasion) {
+		this.typeid = typeid;
 		this.propertyType = propertyType;
 		this.hp = hp;
 		this.maxHp=maxHp;
