@@ -23,6 +23,7 @@ public class Animal {
 		this.power = 10;
 		this.armor = 10;
 		this.evasion = 10;
+		this.maxHp=100;
 	}
 	
 	public String getImagePath() {
@@ -53,9 +54,10 @@ public class Animal {
 		this.actionType = actionType;
 	}
 
-	public Animal(int propertyType, int hp,int power, int armor, int evasion) {
+	public Animal(int propertyType, int hp, int maxHp, int power, int armor, int evasion) {
 		this.propertyType = propertyType;
 		this.hp = hp;
+		this.maxHp=maxHp;
 		this.power = power;
 		this.armor = armor;
 		this.evasion = evasion;

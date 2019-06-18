@@ -254,6 +254,8 @@ public class BattlePhase extends JPanel implements View {
 		this.setMap("BattlePhase");
 		//가져온 애니멀이 어떤동물인가 알아보기
 		this.prevMap=prevMap;
+		this.user=user;
+		this.hunter=null;
 		
 		System.out.println("Log : prevMap : "+this.prevMap);
 		
@@ -300,6 +302,8 @@ public class BattlePhase extends JPanel implements View {
 	
 		Animal currentUserAnimal = user.getCage().get(userAnimalIndex);
 		myAnimal = currentUserAnimal;
+		System.out.println("Log : currentAnimal: "+currentUserAnimal.getHp());
+		
 		String animalImagePath = currentUserAnimal.getImagePath();
 		
 		System.out.println("Log : currentUserAnimalLocation : "+animalImagePath);
@@ -311,42 +315,6 @@ public class BattlePhase extends JPanel implements View {
 		
 		this.add(userLabel);
 		userLabel.setVisible(true);
-		/*if(animal=="Jellyfish") {
-		Animal currentUserAnimal = user.getCage().get(0);
-		String animalImagePath = currentUserAnimal.getImagePath();
-		
-		ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
-		userLabel.setIcon(myAnimalIcon);
-		userLabel.setLocation(10,50);
-		userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
-		
-		this.add(userLabel);
-		userLabel.setVisible(true);
-		}
-		else if(animal == "Shark") {
-			Animal currentUserAnimal = user.getCage().get(1);
-			String animalImagePath = currentUserAnimal.getImagePath();
-			
-			ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
-			userLabel.setIcon(myAnimalIcon);
-			userLabel.setLocation(10,50);
-			userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
-			
-			this.add(userLabel);
-			userLabel.setVisible(true);
-		}
-		else if(animal == "Lion") {
-			Animal currentUserAnimal = user.getCage().get(2);
-			String animalImagePath = currentUserAnimal.getImagePath();
-			
-			ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
-			userLabel.setIcon(myAnimalIcon);
-			userLabel.setLocation(10,50);
-			userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
-			
-			this.add(userLabel);
-			userLabel.setVisible(true);
-		}*/
 	}
 	
 	/*
@@ -415,10 +383,15 @@ public class BattlePhase extends JPanel implements View {
 	}
 	
 	private void attackAnimal() {
+		System.out.println("Log : myAnimal maxHp: "+myAnimal.getMaxHp());
+		System.out.println("Log : yourAnimal maxHP: "+yourAnimal.getHp());
+		System.out.println("Log : myAnimal HP : "+myAnimal.getHp());
+		System.out.println("Log : yourAnimal Hp: "+yourAnimal.getHp());
+		
 		controller.calcHP(myAnimal, yourAnimal);
 		
-		System.out.println(myAnimal.getHp());
-		System.out.println(yourAnimal.getHp());
+		System.out.println("Log : myAnimal HP : "+myAnimal.getHp());
+		System.out.println("Log : yourAnimal Hp: "+yourAnimal.getHp());
 		
 		if(yourAnimal.getHp()==0) {
 			//fight to wild

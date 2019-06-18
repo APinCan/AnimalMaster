@@ -60,7 +60,7 @@ public class Controler {
 	}
 
 	private Animal randAnimal(int map) {
-		Animal ani;
+		Animal ani=null;
 		int per = ran.nextInt(10);
 		switch(map) {
 		case 0 :
@@ -83,9 +83,7 @@ public class Controler {
 			if(per < 5)
 				ani = new Mouse();
 			else if(per < 9)
-				ani = new Dog();
-			else
-				ani = new Bear();			
+				ani = new Dog();	
 			break;
 		default :
 			ani = null;
@@ -161,7 +159,7 @@ public class Controler {
 
 	public void winBattle(Animal winner, Animal loser) {
 		double plusPower = 0.05 * loser.getPower();
-		double plusMaxHp = 0.05 * loser.getHp();
+		double plusMaxHp = 0.05 * loser.getMaxHp();
 		double plusArmor = 0.05 * loser.getArmor();
 		double plusEvasion = 0.05 * loser.getEvasion();
 		int power = winner.getPower() + (int) plusPower;
@@ -175,7 +173,7 @@ public class Controler {
 		winner.setEvasion(Evasion);
 
 		winner.setHp(winner.getMaxHp());
-		loser.setHp(loser.getHp());
+		loser.setHp(loser.getMaxHp());
 	}
 
 	public void saveGame(User user, int saveNum) throws SQLException {
