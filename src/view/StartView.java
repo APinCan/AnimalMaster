@@ -22,6 +22,7 @@ import model.Deer;
 import model.Fox;
 import model.Hunter;
 import model.Mouse;
+import model.Shark;
 import model.User;
 
 import javax.swing.JButton;
@@ -87,6 +88,7 @@ public class StartView extends JFrame{
 		 * 임시초기화 테스트
 		 */
 		user.cage.add(new Mouse());
+		user.cage.add(new Shark());
 		
 		
 		path=System.getProperty("user.dir");

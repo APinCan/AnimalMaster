@@ -138,6 +138,7 @@ public class Controler {
 					ani2.setHp(0);
 			}
 		}
+		System.out.println(ani1.getHp()+" "+ani2.getHp());
 	}
 
 	public boolean catchAnimal(Animal ani) {

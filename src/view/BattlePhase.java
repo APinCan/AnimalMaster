@@ -389,9 +389,11 @@ public class BattlePhase extends JPanel implements View {
 		}
 	}
 	
-	private void attackAnimal() {
-		
+	private void attackAnimal() {	
 		//JLabel yourtextBar = new JLabel();
+		controller.calcHP(myAnimal, yourAnimal);
+		System.out.println("HP: "+yourAnimal.getHp()+"  Power: "+yourAnimal.getPower()+"  Armor: "+yourAnimal.getArmor());
+		System.out.println("HP: "+myAnimal.getHp()+"  Power: "+myAnimal.getPower()+"  Armor: "+myAnimal.getArmor());
 		yourtextBar.setText("HP: "+yourAnimal.getHp()+"  Power: "+yourAnimal.getPower()+"  Armor: "+yourAnimal.getArmor());
 		yourtextBar.setEnabled(true);
 		yourtextBar.setLocation(45,45);
@@ -409,20 +411,8 @@ public class BattlePhase extends JPanel implements View {
 		mytextBar.setVisible(true);
 		mytextBar.setForeground(Color.blue);
 		
-		System.out.println("Log : myAnimal maxHp: "+myAnimal.getMaxHp());
-		System.out.println("Log : yourAnimal maxHP: "+yourAnimal.getMaxHp());
-		System.out.println("Log : myAnimal HP : "+myAnimal.getHp());
-		System.out.println("Log : yourAnimal Hp: "+yourAnimal.getHp());
-		System.out.println("Log : myAnimal maxHp: "+myAnimal.getMaxHp());
-		System.out.println("Log : yourAnimal maxHP: "+yourAnimal.getMaxHp());
-		System.out.println("Log : myAnimal HP : "+myAnimal.getHp());
-		System.out.println("Log : yourAnimal Hp: "+yourAnimal.getHp());
-		
-		controller.calcHP(myAnimal, yourAnimal);
-		
-		System.out.println("Log : myAnimal HP : "+myAnimal.getHp());
-		System.out.println("Log : yourAnimal Hp: "+yourAnimal.getHp());
-		
+
+
 		if(yourAnimal.getHp()==0) {
 			//fight to wild
 			if(hunter==null) {
