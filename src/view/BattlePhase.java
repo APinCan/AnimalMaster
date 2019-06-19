@@ -68,6 +68,9 @@ public class BattlePhase extends JPanel implements View {
 	JLabel userLabel = new JLabel();
 	JLabel yourLabel = new JLabel();
 	
+	JLabel yourtextBar = new JLabel();
+	JLabel mytextBar = new JLabel();
+	
 	public BattlePhase() {
 		setMenu();
 		
@@ -278,17 +281,25 @@ public class BattlePhase extends JPanel implements View {
 	 * Animal setting
 	 */
 	private void setYourAnimal(Animal animal) {
-		System.out.println("Log : setYourAnimal");
-		//애니멀이 무엇인가?
+		
 		String animalImagePath=animal.getImagePath();
+		
 		ImageIcon yourAnimalIcon = new ImageIcon(animalImagePath);
 		yourAnimal=animal;
-		
 		yourLabel.setIcon(yourAnimalIcon);
-		yourLabel.setLocation(200,-80);
 		yourLabel.setSize(yourAnimalIcon.getIconWidth(), yourAnimalIcon.getIconHeight());
-		
 		this.add(yourLabel);
+		
+		if(animalImagePath==path+"/src/Image/shark.gif") {
+			yourLabel.setLocation(200,-80);
+			}
+		else if(animalImagePath==path+"/src/Image/mouse.gif") {
+			yourLabel.setLocation(600,-80);
+			}
+		else if(animalImagePath==path+"/src/Image/dog.gif") {
+			yourLabel.setLocation(600,-80);
+		}
+		yourLabel.setLocation(220,-70);
 		yourLabel.setVisible(true);
 	}
 	
@@ -296,16 +307,22 @@ public class BattlePhase extends JPanel implements View {
 		this.user = user;
 	
 		Animal currentUserAnimal = user.getCage().get(userAnimalIndex);
-		myAnimal = currentUserAnimal;
-		
+		myAnimal = currentUserAnimal;	
 		String animalImagePath = currentUserAnimal.getImagePath();
 				
 		ImageIcon myAnimalIcon = new ImageIcon(animalImagePath);
 		userLabel.setIcon(myAnimalIcon);
-		userLabel.setLocation(50,80);
+		//userLabel.setLocation(50,80);
 		userLabel.setSize(myAnimalIcon.getIconWidth(), myAnimalIcon.getIconHeight());
-		
 		this.add(userLabel);
+		if(animalImagePath==path+"/src/Image/shark.gif") {
+			userLabel.setLocation(400,80);
+			//userLabel.equals();
+			}
+		else if(animalImagePath==path+"/src/Image/mouse.gif") {
+			userLabel.setLocation(200,50);
+			}
+		userLabel.setLocation(50,80);
 		userLabel.setVisible(true);
 	}
 	
@@ -373,6 +390,25 @@ public class BattlePhase extends JPanel implements View {
 	}
 	
 	private void attackAnimal() {
+		
+		//JLabel yourtextBar = new JLabel();
+		yourtextBar.setText("HP: "+yourAnimal.getHp()+"  Power: "+yourAnimal.getPower()+"  Armor: "+yourAnimal.getArmor());
+		yourtextBar.setEnabled(true);
+		yourtextBar.setLocation(45,45);
+		yourtextBar.setSize(200,20);
+		this.add(yourtextBar);
+		yourtextBar.setVisible(true);
+		yourtextBar.setForeground(Color.red);
+		
+		//JLabel mytextBar = new JLabel();
+		mytextBar.setText("HP: "+myAnimal.getHp()+"  Power: "+myAnimal.getPower()+"  Armor: "+myAnimal.getArmor());
+		mytextBar.setEnabled(true);
+		mytextBar.setLocation(325,180);
+		mytextBar.setSize(200,20);
+		this.add(mytextBar);
+		mytextBar.setVisible(true);
+		mytextBar.setForeground(Color.blue);
+		
 		System.out.println("Log : myAnimal maxHp: "+myAnimal.getMaxHp());
 		System.out.println("Log : yourAnimal maxHP: "+yourAnimal.getMaxHp());
 		System.out.println("Log : myAnimal HP : "+myAnimal.getHp());

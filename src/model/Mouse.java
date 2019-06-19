@@ -4,8 +4,8 @@ public class Mouse extends Animal{
 	
 	
 	public Mouse() {
-		//Áã : Ç®¼Ó¼º
-		super(9,2,15, 15,10,10,40);		
+		//�찾 : �짰쩌�쩌쨘
+		super(9,2,15, 15,1,10,40);		
 		this.imagePath = path+"/src/Image/mouse.gif";
 	}
 
